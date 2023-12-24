@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /** 用户数据的实体类 */
+
 public class User extends BaseEntity implements Serializable {
     private Integer uid;
     private String username;

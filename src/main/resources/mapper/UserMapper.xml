@@ -21,14 +21,14 @@
     </insert>
 
 
-    <!-- 根据用户id查询用户数据：User findByUid(Integer uid) -->
-    <select id="findByUid" resultMap="UserEntityMap">
+    <!-- 根据用户名查询用户数据：User findByUsername(String username) -->
+    <select id="findByUsername" resultMap="UserEntityMap">
         SELECT
             *
         FROM
             t_user
         WHERE
-            uid = #{uid}
+            username = #{username}
     </select>
 
 </mapper>

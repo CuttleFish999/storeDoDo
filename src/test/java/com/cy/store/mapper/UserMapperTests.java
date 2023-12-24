@@ -19,7 +19,7 @@ public class UserMapperTests {
     @Test
     public void insert() {
         User user = new User();
-        user.setUsername("user06");
+        user.setUsername("user07 ");
         user.setPassword("123456");
         Integer rows = userMapper.insert(user);
         System.out.println("rows=" + rows);
@@ -28,9 +28,9 @@ public class UserMapperTests {
 
 
     @Test
-    public void findByUid() {
-        Integer uid = 7;
-        User result = userMapper.findByUid(uid);
+    public void findByUsername() {
+        String username = "user06";
+        User result = userMapper.findByUsername(username);
         System.out.println(result);
     }
 

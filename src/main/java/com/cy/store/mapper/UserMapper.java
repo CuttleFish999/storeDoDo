@@ -2,27 +2,28 @@ package com.cy.store.mapper;
 
 import com.cy.store.entity.User;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
-/** 处理用户数据操作的持久层接口 */
+/** 處理使用者資料連接的持久層介面 */
+
 public interface UserMapper {
     /**
-     * 插入用户数据
-     * @param user 用户数据
-     * @return 受影响的行数
+     * 插入會員數據
+     * @param user 會員
+     * @return 產生多少筆資料
      */
     Integer insert(User user);
 
 
-
-
-    User findByUid(Integer uid);
-
-    /*
-      根据uid更新用户资料
-      @param user 封装了用户id和新个人资料的对象
-     * @return 受影响的行数
+    /**
+     * 根據會員名稱查詢會員資料
+     * @param username 會員名稱
+     * @return 產生多少筆資料
      */
+    User findByUsername(String username);
+
+
 
 }

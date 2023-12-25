@@ -3,7 +3,7 @@ package com.cy.store.entity;
 import java.io.Serializable;
 import java.util.Objects;
 
-/** 用户数据的实体类 */
+/** 會員數據實體類別 */
 
 public class User extends BaseEntity implements Serializable {
     private Integer uid;

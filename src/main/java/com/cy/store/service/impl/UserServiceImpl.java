@@ -12,7 +12,7 @@ import org.springframework.util.DigestUtils;
 import java.util.Date;
 import java.util.UUID;
 
-/* 會員功能業務層的實作 */
+/* 會員功能業務邏輯層的實作 */
 @Service //Service註解 : 將當前的類別交給Spring管理, 自動實體化跟維護
 public class UserServiceImpl implements IUserService {
 
@@ -36,8 +36,12 @@ public class UserServiceImpl implements IUserService {
         String oldPassword = user.getPassword();
         //得到鹽值(隨機生成)來加密
         String salt = UUID.randomUUID().toString().toUpperCase();
-        //再把密碼跟鹽值弄成一個整體進行加密
-
+        //補全數據 ,鹽值記錄到SQL
+        user.setSalt(salt);
+        //再把密碼跟鹽值弄成一個整體進行加密, 忽略原有密碼提升數據的安全性
+        String md5Password =  getMD5Password(oldPassword, salt);
+        //將加密之後的密碼重新設定到user類別中
+        user.setPassword(md5Password);
 
         // 補齊數據 is_delete 設定成0
         user.setIsDelete(0);

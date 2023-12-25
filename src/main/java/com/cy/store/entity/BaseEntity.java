@@ -3,7 +3,7 @@ package com.cy.store.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-/** 实体类的基类 */
+/** 會員數據的父類別 */
 public class BaseEntity implements Serializable {
     private String createdUser;
     private Date createdTime;

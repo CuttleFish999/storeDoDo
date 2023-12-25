@@ -6,11 +6,11 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
-/** 處理使用者資料連接的持久層介面 */
+/** 處理會員資料連接的持久層介面 */
 
 public interface UserMapper {
     /**
-     * 插入會員數據
+     * 插入使用者數據
      * @param user 會員
      * @return 產生多少筆資料
      */

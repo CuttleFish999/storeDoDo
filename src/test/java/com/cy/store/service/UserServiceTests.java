@@ -1,9 +1,7 @@
 package com.cy.store.service;
 
 import com.cy.store.entity.User;
-import com.cy.store.mapper.UserMapper;
 import com.cy.store.service.ex.ServiceException;
-import com.cy.store.service.impl.UserServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +31,11 @@ public class UserServiceTests {
         }
     }
 
+    @Test
+    public void login(){
+        User user  = userService.login("test01","123");
+        System.out.println(user);
+    }
 
 
 }

@@ -32,6 +32,9 @@ public class BassController {
         } else if (e instanceof InsertException) {
             result.setState(5000);
             result.setMessage("註冊時產生未知的異常");
+        }else if (e instanceof UpdateException) {
+            result.setState(5001);
+            result.setMessage("更新時產生未知的異常");
         }
 
         return result;

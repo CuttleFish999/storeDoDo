@@ -16,6 +16,8 @@ public class UserMapperTests {
     @Autowired
     private UserMapper userMapper;
 
+//----------------------------------------------//
+
     @Test
     public void insert() {
         User user = new User();
@@ -26,13 +28,35 @@ public class UserMapperTests {
     }
 
 
+//----------------------------------------------//
 
     @Test
     public void findByUsername() {
         String username = "user06";
-        User result = userMapper.findByUsername(username);
-        System.out.println(result);
+        User user = userMapper.findByUsername(username);
+        System.out.println(user);
     }
+
+    //----------------------------------------------------------------//
+
+    @Test
+    public void updatePasswordByUid() {
+
+        userMapper.updatePasswordByUid(7,"123","系統管理者",new Date());
+
+
+    }
+
+//----------------------------------------------//
+
+    @Test
+    public void findByUid() {
+        Integer uid = 7;
+        System.out.println(userMapper.findByUid(uid));
+
+    }
+
+
 
 }
 

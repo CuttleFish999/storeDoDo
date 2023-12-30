@@ -1,12 +1,15 @@
 package com.cy.store.service;
 
 import com.cy.store.entity.User;
+import com.cy.store.mapper.UserMapper;
 import com.cy.store.service.ex.ServiceException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Date;
 
 // @RunWith(SpringRunner.class)表示啟動這個單元測試(正常單元測試是不能用的), 需要傳一個SpringRunner型別的參數
 @RunWith(SpringRunner.class)
@@ -15,11 +18,13 @@ public class UserServiceTests {
     @Autowired
     private IUserService userService;
 
+//----------------------------------------------------------------//
+
     @Test
     public void reg() {
         try {
             User user = new User();
-            user.setUsername("jack02");
+            user.setUsername("test02");
             user.setPassword("123");
             userService.reg(user);
             System.out.println("OK");
@@ -30,12 +35,26 @@ public class UserServiceTests {
             System.out.println(e.getMessage());
         }
     }
+//----------------------------------------------------------------//
 
     @Test
-    public void login(){
-        User user  = userService.login("test01","123");
+    public void login() {
+
+        User user = userService.login("test01", "123456");
         System.out.println(user);
     }
+
+//----------------------------------------------------------------//
+    @Test
+    public void changePassword() {
+    userService.changePassword(9,"網站管理者","123456","321");
+
+    }
+//----------------------------------------------------------------//
+
+
+
+
 
 
 }

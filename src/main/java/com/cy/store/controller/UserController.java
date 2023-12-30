@@ -42,7 +42,15 @@ public class UserController extends BassController {
         return new JsonResult<User>(OK, data);
     }
 
-
+    @RequestMapping("change_password")
+    public JsonResult<Void> changePassword(String oldPassword,
+                                           String newPassword,
+                                           HttpSession session) {
+        Integer uid = getuidFromSession(session);
+        String username = getUsernameFromSession(session);
+        userService.changePassword(uid, username, oldPassword, newPassword);
+        return new JsonResult<>(OK);
+    }
 
 
 

@@ -3,10 +3,7 @@ package com.cy.store.service.impl;
 import com.cy.store.entity.User;
 import com.cy.store.mapper.UserMapper;
 import com.cy.store.service.IUserService;
-import com.cy.store.service.ex.InsertException;
-import com.cy.store.service.ex.PasswordNotMatchException;
-import com.cy.store.service.ex.UserNotFoundException;
-import com.cy.store.service.ex.UsernameDuplicateException;
+import com.cy.store.service.ex.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -21,6 +18,7 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     private UserMapper userMapper;
 
+    //------------------------------------------------------------------------------------------------------//
     @Override
     public void reg(User user) {
         //通過user參數拿到傳過來的username
@@ -46,7 +44,7 @@ public class UserServiceImpl implements IUserService {
         user.setSalt(salt);
 
         //再把密碼跟鹽值弄成一個整體進行加密, 忽略原有密碼提升數據的安全性
-        String md5Password =  getMD5Password(oldPassword, salt);
+        String md5Password = getMD5Password(oldPassword, salt);
 
         //將加密之後的密碼重新設定到user類別中
         user.setPassword(md5Password);
@@ -61,7 +59,6 @@ public class UserServiceImpl implements IUserService {
         user.setModifiedTime(date);
 
 
-
         //執行註冊業務功能的實作 (rows == 1)
         Integer rows = userMapper.insert(user);
         if (rows != 1) {
@@ -70,6 +67,7 @@ public class UserServiceImpl implements IUserService {
 
 
     }
+//------------------------------------------------------------------------------------------------------//
 
     @Override
     public User login(String username, String password) {
@@ -78,25 +76,25 @@ public class UserServiceImpl implements IUserService {
         //在根據username查詢會員是否存在, 不再就丟異常
         User result = userMapper.findByUsername(username);
 
-        if(result == null){
+        if (result == null) {
             throw new UserNotFoundException("會員不存在");
         }
         //檢查密碼是否對應
-        //1.先拿到資料庫加密的密碼
+        //先拿到資料庫加密的密碼
         String oldPassword = result.getPassword();
 
-        //2.在和User傳過來的密碼對比
-        //2-1 先取得鹽值,上次註冊薪增到資料庫的鹽值
-         String salt = result.getSalt();
+        //在和User傳過來的密碼對比
+        //先取得鹽值,上次註冊薪增到資料庫的鹽值
+        String salt = result.getSalt();
 
-        //2-2 將User傳的密碼按造一樣的md5算法進行加密
+        //將User傳的密碼按照一樣的md5算法進行加密
         String newMd5Password = getMD5Password(password, salt);
-        //3.和密碼比對有沒有相同
-        if(newMd5Password.equals(oldPassword)){
+        //密碼比對有沒有相同
+        if (newMd5Password.equals(oldPassword)) {
             throw new PasswordNotMatchException("密碼錯誤");
         }
         //判斷會員有沒有被停權 is_delete  1等於停權
-        if(result.getIsDelete() == 1){
+        if (result.getIsDelete() == 1) {
             throw new UserNotFoundException("會員不存在");
         }
 
@@ -110,10 +108,33 @@ public class UserServiceImpl implements IUserService {
         //在把資料回傳給user, 為了之後數據能帶到其他頁面使用
         return user;
     }
+//------------------------------------------------------------------------------------------------------//
 
+    @Override
+    public void changePassword(Integer uid,
+                                String username,
+                                String oldPassword,
+                                String newPassword) {
+        //更改密碼先檢查會員有沒有被停權
+        User result = userMapper.findByUid(uid);
+        if (result == null || result.getIsDelete() == 1) {
+            throw new UserNotFoundException("會員不存在");
+        }
+        //開始比對舊密碼跟新密碼
+        String oldMd5Password = getMD5Password(oldPassword, result.getSalt());
+        if (result.getPassword().equals(oldMd5Password)) {
+            throw new PasswordNotMatchException("密碼錯誤");
+        }
+        //再把新密碼加密之後更改
+        String newMd5Password = getMD5Password(newPassword, result.getSalt());
+        Integer rows =  userMapper.updatePasswordByUid(uid, newMd5Password, username, new Date());
+        if(rows != 1 ){
+            throw new UpdateException("更新時產生未知的錯誤");
+        }
 
+    }
 
-
+//------------------------------------------------------------------------------------------------------//
 
     /**
      * md5加密方法
@@ -128,5 +149,6 @@ public class UserServiceImpl implements IUserService {
         return password;
 
     }
+//------------------------------------------------------------------------------------------------------//
 
 }

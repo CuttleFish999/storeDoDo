@@ -1,8 +1,6 @@
 package com.cy.store.mapper;
 
 import com.cy.store.entity.User;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
@@ -58,5 +56,13 @@ public interface UserMapper {
      * @return 有找到就回傳, 沒有就回傳null
      */
     User findByUid(Integer uid);
+
+
+    /**
+     * 更新會員資料
+     * @param user 會員的參數
+     * @return 回傳值是更新的筆數
+     */
+   Integer updateInfoByUid(User user);
 
 }

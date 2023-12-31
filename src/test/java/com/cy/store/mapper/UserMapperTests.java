@@ -1,6 +1,7 @@
 package com.cy.store.mapper;
 
 import com.cy.store.entity.User;
+import com.cy.store.service.IUserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,8 @@ public class UserMapperTests {
     @Autowired
     private UserMapper userMapper;
 
-//----------------------------------------------//
+
+    //----------------------------------------------//
 
     @Test
     public void insert() {
@@ -28,7 +30,7 @@ public class UserMapperTests {
     }
 
 
-//----------------------------------------------//
+    //----------------------------------------------//
 
     @Test
     public void findByUsername() {
@@ -42,12 +44,12 @@ public class UserMapperTests {
     @Test
     public void updatePasswordByUid() {
 
-        userMapper.updatePasswordByUid(7,"123","系統管理者",new Date());
+        userMapper.updatePasswordByUid(7, "123", "系統管理者", new Date());
 
 
     }
 
-//----------------------------------------------//
+    //----------------------------------------------//
 
     @Test
     public void findByUid() {
@@ -55,6 +57,24 @@ public class UserMapperTests {
         System.out.println(userMapper.findByUid(uid));
 
     }
+
+    //----------------------------------------------//
+
+    @Test
+    public void updateInfoByUid() {
+        User user = new User();
+        user.setUid(7);
+        user.setPhone("0123456789");
+        user.setEmail("TomTest@gmail.com");
+        user.setGender(1);
+        user.setModifiedUser("網站管理員");
+        user.setModifiedTime(new Date());
+        Integer rows = userMapper.updateInfoByUid(user);
+        System.out.println("rows=" + rows);
+
+    }
+
+    //----------------------------------------------//
 
 
 

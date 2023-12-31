@@ -112,9 +112,9 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public void changePassword(Integer uid,
-                                String username,
-                                String oldPassword,
-                                String newPassword) {
+                               String username,
+                               String oldPassword,
+                               String newPassword) {
         //更改密碼先檢查會員有沒有被停權
         User result = userMapper.findByUid(uid);
         if (result == null || result.getIsDelete() == 1) {
@@ -127,11 +127,53 @@ public class UserServiceImpl implements IUserService {
         }
         //再把新密碼加密之後更改
         String newMd5Password = getMD5Password(newPassword, result.getSalt());
-        Integer rows =  userMapper.updatePasswordByUid(uid, newMd5Password, username, new Date());
-        if(rows != 1 ){
+        Integer rows = userMapper.updatePasswordByUid(uid, newMd5Password, username, new Date());
+        if (rows != 1) {
             throw new UpdateException("更新時產生未知的錯誤");
         }
 
+    }
+//------------------------------------------------------------------------------------------------------//
+
+    @Override
+    public User getByUid(Integer uid) {
+        User result = userMapper.findByUid(uid);
+        if (result == null || result.getIsDelete() == 1) {
+            throw new UserNotFoundException("會員不存在");
+        }
+        //new 一個新的User實體
+        //把上面查到的的username/phone/email/gender
+        //都放進去
+        User user = new User();
+        user.setUsername(result.getUsername());
+        user.setPhone(result.getPhone());
+        user.setEmail(result.getEmail());
+        user.setGender(result.getGender());
+        return user;
+    }
+
+//------------------------------------------------------------------------------------------------------//
+
+    /**
+     * user物件中的數據只有phone/email/gender
+     * 要在手動將uid/username封裝進去user物件
+     */
+    @Override
+    public void changeInfo(Integer uid, String username, User user) {
+        User result = userMapper.findByUid(uid);
+        if (result == null || result.getIsDelete() == 1) {
+            throw new UserNotFoundException("會員不存在");
+        }
+        user.setUid(uid);
+//        user.setUsername(username);
+        user.setModifiedUser(username);
+        user.setModifiedTime(new Date());
+
+        Integer rows = userMapper.updateInfoByUid(user);
+        if(rows != 1) {
+            throw new UpdateException("更新時產生未知的錯誤");
+
+        }
     }
 
 //------------------------------------------------------------------------------------------------------//
@@ -150,5 +192,6 @@ public class UserServiceImpl implements IUserService {
 
     }
 //------------------------------------------------------------------------------------------------------//
+
 
 }

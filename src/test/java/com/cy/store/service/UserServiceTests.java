@@ -23,7 +23,7 @@ public class UserServiceTests {
     @Test
     public void reg() {
         try {
-            User user = new User();
+             User user = new User();
             user.setUsername("test02");
             user.setPassword("123");
             userService.reg(user);
@@ -52,8 +52,26 @@ public class UserServiceTests {
     }
 //----------------------------------------------------------------//
 
+    @Test
+    public void getByUid() {
+//        Integer uid = 7;
+//        User user = userService.getByUid(uid);
+//        System.out.println(user);
+        System.out.println(userService.getByUid(7));
+    }
 
+    //----------------------------------------------//
 
+    @Test
+    public void changeInfo() {
+        User user = new User();
+        user.setPhone("09876543210");
+        user.setEmail("changeInfoTest@gmail.com");
+        user.setGender(0);
+        userService.changeInfo(7,"管理者測試",user);
+    }
+
+//----------------------------------------------------------------//
 
 
 

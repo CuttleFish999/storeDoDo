@@ -79,30 +79,30 @@ public class UserServiceImpl implements IUserService {
         if (result == null) {
             throw new UserNotFoundException("會員不存在");
         }
-        //檢查密碼是否對應
-        //先拿到資料庫加密的密碼
-        String oldPassword = result.getPassword();
+        //判斷會員有沒有被停權 is_delete  1等於停權
+        if (result.getIsDelete() == 1) {
+            throw new UserNotFoundException("會員不存在");
+        }
+
 
         //在和User傳過來的密碼對比
         //先取得鹽值,上次註冊薪增到資料庫的鹽值
         String salt = result.getSalt();
 
         //將User傳的密碼按照一樣的md5算法進行加密
-        String newMd5Password = getMD5Password(password, salt);
+        String md5Password = getMD5Password(password, salt);
         //密碼比對有沒有相同
-        if (newMd5Password.equals(oldPassword)) {
+        if (!result.getPassword().equals(md5Password)) {
             throw new PasswordNotMatchException("密碼錯誤");
         }
-        //判斷會員有沒有被停權 is_delete  1等於停權
-        if (result.getIsDelete() == 1) {
-            throw new UserNotFoundException("會員不存在");
-        }
+
 
         //這樣把一層到一層之間傳輸的數據變少了
         //例如登錄之後的頁面上方顯示只需要這些數據
         User user = new User();
         user.setUid(result.getUid());
         user.setUsername(result.getUsername());
+        //回傳用戶頭像
         user.setAvatar(result.getAvatar());
 
         //在把資料回傳給user, 為了之後數據能帶到其他頁面使用
@@ -170,10 +170,28 @@ public class UserServiceImpl implements IUserService {
         user.setModifiedTime(new Date());
 
         Integer rows = userMapper.updateInfoByUid(user);
-        if(rows != 1) {
+        if (rows != 1) {
             throw new UpdateException("更新時產生未知的錯誤");
 
         }
+    }
+//------------------------------------------------------------------------------------------------------//
+
+
+    @Override
+    public void changeAvatar(Integer uid, String avatar, String username) {
+
+        //先查會員數據再不再
+        User result = userMapper.findByUid(uid);
+        if (result == null || result.getIsDelete() == 1) {
+            throw new UserNotFoundException("會員不存在");
+        }
+
+        Integer rows = userMapper.updateAvatarByUid(uid, avatar, username, new Date());
+        if (rows != 1) {
+            throw new UpdateException("更新會員大頭貼時產生未知的異常");
+        }
+
     }
 
 //------------------------------------------------------------------------------------------------------//

@@ -1,6 +1,7 @@
 package com.cy.store.mapper;
 
 import com.cy.store.entity.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
 
@@ -48,7 +49,6 @@ public interface UserMapper {
 
 //----------------------------------------------//
 
-
     /**
      * 根據會員id查詢會員資料
      *
@@ -57,6 +57,7 @@ public interface UserMapper {
      */
     User findByUid(Integer uid);
 
+//----------------------------------------------//
 
     /**
      * 更新會員資料
@@ -64,5 +65,25 @@ public interface UserMapper {
      * @return 回傳值是更新的筆數
      */
    Integer updateInfoByUid(User user);
+
+//----------------------------------------------//
+    //
+    /**
+     * Param
+     * 如果xml裡面的SQL語法#{}跟我們要對應的介面方法參數不一樣
+     * 這個Param會將設定的參數注入到xml對應的#{}裡面
+     * 根據會員uid更改會員大頭貼
+     * @param uid 會員uid
+     * @param avatar 會員大頭貼
+     * @param modifiedUser  更改者
+     * @param modifiedTime  更改時間
+     * @return
+     */
+   Integer updateAvatarByUid(
+           @Param("uid")Integer uid,
+           @Param("avatar") String avatar,
+           @Param("modifiedUser") String modifiedUser,
+           @Param("modifiedTime")Date modifiedTime);
+
 
 }

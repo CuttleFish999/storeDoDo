@@ -1,6 +1,7 @@
 package com.cy.store.controller;
 
 
+import com.cy.store.controller.ex.*;
 import com.cy.store.service.ex.*;
 import com.cy.store.util.JsonResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -17,25 +18,41 @@ public class BassController {
 
     // 當專案有異常, 會被統一攔截到這個請求處理方法, 方法的回傳值會直接傳給前端
     // 自動將異常傳遞給這個方法的參數上
-    @ExceptionHandler(ServiceException.class) //用來統一處理丟出的異常
-    public JsonResult<Void> handleExpection(Throwable e) {
+    @ExceptionHandler({ServiceException.class, FileUploadException.class}) //用來統一處理丟出的異常
+    public JsonResult<Void> handleException(Throwable e) {
         JsonResult<Void> result = new JsonResult<>(e);
         if (e instanceof UsernameDuplicateException) {
             result.setState(4000);
             result.setMessage("名稱已被使用");
         } else if (e instanceof UserNotFoundException) {
             result.setState(5001);
-            result.setMessage("會員不存在的");
+            result.setMessage("會員不存在");
         } else if (e instanceof PasswordNotMatchException) {
             result.setState(5002);
             result.setMessage("密碼錯誤");
         } else if (e instanceof InsertException) {
             result.setState(5000);
             result.setMessage("註冊時產生未知的異常");
-        }else if (e instanceof UpdateException) {
+        } else if (e instanceof UpdateException) {
             result.setState(5001);
             result.setMessage("更新時產生未知的異常");
+        } else if (e instanceof FileEmptyException) {
+            result.setState(6000);
+            result.setMessage("檔案是空的");
+        } else if (e instanceof FileSizeException) {
+            result.setState(6001);
+            result.setMessage("檔案大小有問題");
+        } else if (e instanceof FileTypeException) {
+            result.setState(6002);
+            result.setMessage("檔案類型有問題");
+        } else if (e instanceof FileStateException) {
+            result.setState(6003);
+            result.setMessage("檔案狀態有問題");
+        } else if (e instanceof FileUploadIOException) {
+            result.setState(6004);
+            result.setMessage("檔案上傳產生未知的異常");
         }
+
 
         return result;
     }
@@ -56,11 +73,12 @@ public class BassController {
 
     /**
      * 拿到當前登錄會員的username
-     * @param session  session變數
+     *
+     * @param session session變數
      * @return 當前登錄會員的username
      */
     public final String getUsernameFromSession(HttpSession session) {
-       return session.getAttribute("username").toString();
+        return session.getAttribute("username").toString();
     }
 
 

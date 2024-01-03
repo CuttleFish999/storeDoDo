@@ -28,7 +28,7 @@ public class StoreApplication {
         MultipartConfigFactory factory = new MultipartConfigFactory();
         //設定工廠接收的檔案大小,跟請求的大小
         factory.setMaxFileSize(DataSize.of(10, DataUnit.MEGABYTES));
-        factory.setMaxRequestSize(DataSize.of(15,DataUnit.MEGABYTES));
+        factory.setMaxRequestSize(DataSize.of(10, DataUnit.MEGABYTES));
         //通過工廠來創建一個 MultipartConfigElement
         return factory.createMultipartConfig();
     }

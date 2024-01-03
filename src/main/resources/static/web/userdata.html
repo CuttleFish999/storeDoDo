@@ -242,31 +242,6 @@
 </footer>
 <!--footer結束-->
 <script type="text/javascript">
-    $("#btn-change-info").click(function () {
-        $.ajax({
-            url: "/users/change_info",
-            type: "POST",
-            data: $("#form-change-info").serialize(),
-            dataType: "JSON",
-            success: function (json) {
-                if (json.state === 200) {
-                    alert("更改個人資料成功");
-                    //更改成功後重新載入頁面
-                    location.href = "userdata.html";
-                } else {
-                    alert("更改個人資料失敗");
-                }
-            },
-            error: function (xhr) {
-                alert("更改個人資料時產生未知的異常" + xhr.message);
-            }
-
-
-        })
-
-    })
-
-
     /**
      * 檢查到當前頁面被載入,就觸發ready方法
      * $(document).ready(function(){
@@ -309,6 +284,32 @@
         });
 
     });
+
+
+    $("#btn-change-info").click(function () {
+        $.ajax({
+            url: "/users/change_info",
+            type: "POST",
+            data: $("#form-change-info").serialize(),
+            dataType: "JSON",
+            success: function (json) {
+                if (json.state === 200) {
+                    alert("更改個人資料成功");
+                    //更改成功後重新載入頁面
+                    location.href = "userdata.html";
+                } else {
+                    alert("更改個人資料失敗");
+                }
+            },
+            error: function (xhr) {
+                alert("更改個人資料時發現未知的異常" + xhr.message);
+                location.href = "login.html";
+
+            }
+        });
+    });
+
+
 </script>
 </body>
 

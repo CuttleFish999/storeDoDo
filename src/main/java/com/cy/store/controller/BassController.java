@@ -25,11 +25,14 @@ public class BassController {
             result.setState(4000);
             result.setMessage("名稱已被使用");
         } else if (e instanceof UserNotFoundException) {
-            result.setState(5001);
+            result.setState(4001);
             result.setMessage("會員不存在");
         } else if (e instanceof PasswordNotMatchException) {
-            result.setState(5002);
+            result.setState(4002);
             result.setMessage("密碼錯誤");
+        } else if (e instanceof AddressCountLimitException) {
+            result.setState(4003);
+            result.setMessage("收貨地址數量超過上限");
         } else if (e instanceof InsertException) {
             result.setState(5000);
             result.setMessage("註冊時產生未知的異常");

@@ -150,17 +150,14 @@
             dataType: "json",
             success: function (json) {
                 console.log(json);
-                $.cookie("avatar", json.data.avatar, {expires: 7});
-                console.log("cookie中的avatar=" + $.cookie("avatar"));
                 if (json.state === 200) {
                     alert("登錄成功");
                     //成功要跳轉到首頁index.
                     //相對路徑設定
-
-
+                    $.cookie("avatar", json.data.avatar, {expires: 7});
+                    console.log("cookie中的avatar=" + $.cookie("avatar"));
                     location.href = "index.html";
                     //再把後端返回的頭像存到cookie裡面
-
                 } else {
                     alert("登錄失敗");
                 }
@@ -168,12 +165,8 @@
             error: function (xhr) {
                 alert("登錄時產生未知的異常" + xhr.message);
             }
-
-
         })
-
     })
-
 </script>
 </body>
 </html>

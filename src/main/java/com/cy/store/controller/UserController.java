@@ -109,10 +109,6 @@ public class UserController extends BassController {
      * Springboot整合了SpringMVC 所以處理請求的參數上用這個參數類型
      * Springboot會自動將前端來的數據傳給這個參數類型的變數
      * //@RequestParam("")  裡面放前端表單的name屬性名
-     *
-     * @param session
-     * @param file
-     * @return
      */
     @RequestMapping("change_avatar")
     public JsonResult<String> changeAvatar(
@@ -140,7 +136,7 @@ public class UserController extends BassController {
         //上傳的檔案存放位置.../upload/檔案.png
         //獲取在Servlet環境中取得名為 "upload" 的相對路徑在實際檔案系統中的真實路徑
         String parent = session.getServletContext().getRealPath("upload");
-
+        System.out.println(parent);
         //檢查File要放的這個upload資料夾存不存在,不存在就創建
         File dir = new File(parent);
         if (!dir.exists()) {

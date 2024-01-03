@@ -44,7 +44,7 @@ public class UserServiceImpl implements IUserService {
         user.setSalt(salt);
 
         //再把密碼跟鹽值弄成一個整體進行加密, 忽略原有密碼提升數據的安全性
-        String md5Password = getMD5Password(oldPassword, salt);
+        String md5Password = getMd5Password(oldPassword, salt);
 
         //將加密之後的密碼重新設定到user類別中
         user.setPassword(md5Password);
@@ -90,7 +90,7 @@ public class UserServiceImpl implements IUserService {
         String salt = result.getSalt();
 
         //將User傳的密碼按照一樣的md5算法進行加密
-        String md5Password = getMD5Password(password, salt);
+        String md5Password = getMd5Password(password, salt);
         //密碼比對有沒有相同
         if (!result.getPassword().equals(md5Password)) {
             throw new PasswordNotMatchException("密碼錯誤");
@@ -109,30 +109,29 @@ public class UserServiceImpl implements IUserService {
         return user;
     }
 //------------------------------------------------------------------------------------------------------//
-
-    @Override
-    public void changePassword(Integer uid,
-                               String username,
-                               String oldPassword,
-                               String newPassword) {
-        //更改密碼先檢查會員有沒有被停權
-        User result = userMapper.findByUid(uid);
-        if (result == null || result.getIsDelete() == 1) {
-            throw new UserNotFoundException("會員不存在");
-        }
-        //開始比對舊密碼跟新密碼
-        String oldMd5Password = getMD5Password(oldPassword, result.getSalt());
-        if (result.getPassword().equals(oldMd5Password)) {
-            throw new PasswordNotMatchException("密碼錯誤");
-        }
-        //再把新密碼加密之後更改
-        String newMd5Password = getMD5Password(newPassword, result.getSalt());
-        Integer rows = userMapper.updatePasswordByUid(uid, newMd5Password, username, new Date());
-        if (rows != 1) {
-            throw new UpdateException("更新時產生未知的錯誤");
-        }
-
+@Override
+public void changePassword(Integer uid,
+                           String username,
+                           String oldPassword,
+                           String newPassword) {
+    //更改密碼先檢查會員有沒有被停權
+    User result = userMapper.findByUid(uid);
+    if (result == null || result.getIsDelete() == 1) {
+        throw new UserNotFoundException("會員不存在");
     }
+    //開始比對舊密碼跟新密碼
+    String oldMd5Password = getMd5Password(oldPassword, result.getSalt());
+    if (result.getPassword().equals(oldMd5Password)) {
+        throw new PasswordNotMatchException("密碼錯誤");
+    }
+    //再把新密碼加密之後更改
+    String newMd5Password = getMd5Password(newPassword, result.getSalt());
+    Integer rows = userMapper.updatePasswordByUid(uid, newMd5Password, username, new Date());
+    if (rows != 1) {
+        throw new UpdateException("更新時產生未知的錯誤");
+    }
+
+}
 //------------------------------------------------------------------------------------------------------//
 
     @Override
@@ -199,7 +198,7 @@ public class UserServiceImpl implements IUserService {
     /**
      * md5加密方法
      **/
-    private String getMD5Password(String password, String salt) {
+    private String getMd5Password(String password, String salt) {
         for (int i = 0; i < 3; i++) {
             //md5加密算法方法在轉成大寫, 然後連續加密三次
             password = DigestUtils.md5DigestAsHex((salt + password + salt).getBytes()).toUpperCase();

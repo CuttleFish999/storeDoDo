@@ -10,7 +10,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
 
-// @RunWith(SpringRunner.class)注解是一个测试启动器，可以加载Springboot测试注解
+// @RunWith(SpringRunner.class)注解是一个測試啟動器，
+// 可以載入Springboot測試的註解
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserMapperTests {

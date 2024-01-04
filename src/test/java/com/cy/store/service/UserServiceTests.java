@@ -37,14 +37,14 @@ public class UserServiceTests {
     @Test
     public void login() {
 
-        User user = userService.login("Tom002", "123456");
+        User user = userService.login("test01", "123");
         System.out.println(user);
     }
 
 //----------------------------------------------------------------//
     @Test
     public void changePassword() {
-    userService.changePassword(9,"Service測試","123456","321");
+    userService.changePassword(2,"改密碼測試","321","123");
 
     }
 //----------------------------------------------------------------//
@@ -65,7 +65,7 @@ public class UserServiceTests {
         user.setPhone("09876543210");
         user.setEmail("changeInfoTest@gmail.com");
         user.setGender(0);
-        userService.changeInfo(7,"Service測試",user);
+        userService.changeInfo(2,"新增資料測試",user);
     }
 
 //----------------------------------------------------------------//

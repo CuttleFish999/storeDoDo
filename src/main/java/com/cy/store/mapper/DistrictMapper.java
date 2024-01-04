@@ -12,4 +12,7 @@ public interface DistrictMapper {
      * @return 某個父代號地下所有區域
      */
     List<District> findByParent(String parent);
+
+
+    String findNameByCode(String code);
 }

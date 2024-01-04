@@ -18,7 +18,7 @@ public class AddressMapperTest {
     @Test
     public void insert() {
         Address address = new Address();
-        address.setUid(12);
+        address.setUid(1);
         address.setPhone("0912345678");
         address.setName("女朋友");
 
@@ -27,7 +27,7 @@ public class AddressMapperTest {
 
     @Test
     public void countByUid() {
-        Integer count = addressMapper.countByUid(12);
+        Integer count = addressMapper.countByUid(1);
         System.out.println("目前有幾筆資料 :　" + count );
     }
 

@@ -18,7 +18,8 @@ public class DistrictServiceTests {
 
     @Test
     public void getByParent() {
-        List<District> list = districtService.getByParent("86");
+        String parent = "886";
+        List<District> list = districtService.getByParent(parent);
         for (District d : list) {
             System.out.println(d);
         }

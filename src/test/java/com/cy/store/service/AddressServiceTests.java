@@ -20,7 +20,7 @@ public class AddressServiceTests {
         address.setPhone("0912121212");
         address.setName("測試地址");
 
-        addressService.addNewAddress(12,"地址新增測試",address);
+        addressService.addNewAddress(1,"地址新增測試",address);
     }
 
 }

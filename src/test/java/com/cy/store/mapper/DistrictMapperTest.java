@@ -20,12 +20,18 @@ public class DistrictMapperTest {
 
     @Test
     public void findByParent() {
-        List<District> list = districtMapper.findByParent("210100");
+        List<District> list = districtMapper.findByParent("8861200");
         for (District d : list) {
             System.out.println(d);
         }
     }
 
+
+    @Test
+    public void findNameByCode() {
+        String name = districtMapper.findNameByCode("8861102");
+        System.out.println(name);
+    }
 
 }
 

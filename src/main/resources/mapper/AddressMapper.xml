@@ -29,13 +29,11 @@
     </insert>
 
     <select id="countByUid" resultType="java.lang.Integer">
-        SELECT
-            count(*)
-        FROM
-            t_address
-        WHERE
-            uid=#{uid}
-
+        SELECT count(*)
+        FROM t_address
+        WHERE uid = #{uid}
     </select>
+
+
 
 </mapper>

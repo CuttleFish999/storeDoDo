@@ -120,8 +120,9 @@ public void changePassword(Integer uid,
         throw new UserNotFoundException("會員不存在");
     }
     //開始比對舊密碼跟新密碼
-    String oldMd5Password = getMd5Password(oldPassword, result.getSalt());
-    if (result.getPassword().equals(oldMd5Password)) {
+    String oldMd5Password =
+            getMd5Password(oldPassword, result.getSalt());
+    if (!result.getPassword().equals(oldMd5Password)) {
         throw new PasswordNotMatchException("密碼錯誤");
     }
     //再把新密碼加密之後更改

@@ -18,8 +18,8 @@
     <link rel="stylesheet" type="text/css" href="../css/layout.css"/>
     <link rel="stylesheet" type="text/css" href="../css/top.css"/>
     <link rel="stylesheet" type="text/css" href="../css/footer.css"/>
-<!--    <script type="text/javascript" src="../js/distpicker.data.js"></script>-->
-<!--    <script type="text/javascript" src="../js/distpicker.js"></script>-->
+    <!--    <script type="text/javascript" src="../js/distpicker.data.js"></script>-->
+    <!--    <script type="text/javascript" src="../js/distpicker.js"></script>-->
 </head>
 
 <body>
@@ -151,19 +151,19 @@
                             <label class="col-md-2 control-label"><span class="txtred">*</span>國家：</label>
                             <div class="col-md-3">
                                 <select id="province-list" name="provinceCode" class="form-control"
-                                        data-province="---- 選擇市 ----"></select>
+                                        data-province="---- 請選擇 ----"></select>
                             </div>
                             <label class="col-md-2 control-label"><span class="txtred">*</span>城市：</label>
                             <div class="col-md-3">
                                 <select id="city-list" name="cityCode" class="form-control"
-                                        data-city="---- 選擇城市 ----"></select>
+                                        data-city="---- 請選擇 ----"></select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-2 control-label"><span class="txtred">*</span>區：</label>
                             <div class="col-md-3">
                                 <select id="area-list" name="areaCode" class="form-control"
-                                        data-district="---- 選擇區 ----"></select>
+                                        data-district="---- 請選擇 ----"></select>
                             </div>
                             <label class="col-md-2 control-label">郵遞區號：</label>
                             <div class="col-md-3">
@@ -270,12 +270,119 @@
 </footer>
 
 <script type="text/javascript">
+    //value的值表示當前這個區域的code
+    let defaultOption = "<option value='0'>---- 請選擇 ----</option>";
+
+    $(document).ready(function () {
+        showProvinceList();
+        //設定默認的值
+        $("#province-list").append(defaultOption);
+        $("#city-list").append(defaultOption);
+        $("#area-list").append(defaultOption);
+    });
+
+//---------------------------城市----------------------------------------
+    $("#province-list").change(function(){
+        //先拿到父代號
+        let parent = $("#province-list").val();
+        //先清空select下拉列表的option元素 然後設定默認
+        $("#city-list").empty().append(defaultOption);
+        $("#area-list").empty().append(defaultOption);
+
+        if(parent === 0){
+            return;
+        }
+
+        $.ajax({
+            url: "/districts",
+            type: "GET",
+            data: "parent=" + parent, //台灣的parent 886
+            dataType: "JSON",
+            success: function (json) {
+                if (json.state === 200) {
+                    let list = json.data;
+                    console.log("count=" + list.length);
+                    for (let i = 0; i < list.length; i++) {
+                        console.log(list[i].name);
+                        let opt =
+                            "<option value='" + list[i].code + "'>" + list[i].name + "</option>";
+                        $("#city-list").append(opt);
+                    }
+                }else{
+                    alert("欄位載入失敗");
+                }
+            }
+        });
+    });
+//---------------------------區----------------------------------------
+    $("#city-list").change(function(){
+        //先拿到父代號
+        let parent = $("#city-list").val();
+        //先清空select下拉列表的option元素 然後設定默認
+        $("#area-list").empty().append(defaultOption);
+
+        if(parent === 0){
+            return;
+        }
+
+        $.ajax({
+            url: "/districts",
+            type: "GET",
+            data: "parent=" + parent, //台灣的parent 886
+            dataType: "JSON",
+            success: function (json) {
+                if (json.state === 200) {
+                    let list = json.data;
+                    console.log("count=" + list.length);
+                    for (let i = 0; i < list.length; i++) {
+                        console.log(list[i].name);
+                        let opt =
+                            "<option value='" + list[i].code + "'>" + list[i].name + "</option>";
+                        $("#area-list").append(opt);
+                    }
+                }else{
+                    alert("欄位載入失敗");
+                }
+            }
+        });
+    });
+
+
+//---------------------------國家----------------------------------------
+    function showProvinceList() {
+        $.ajax({
+            url: "/districts",
+            type: "POST",
+            data: "parent=886", //台灣的parent 886
+            dataType: "JSON",
+            success: function (json) {
+                if (json.state === 200) {
+                    let list = json.data;
+                    console.log("count=" + list.length);
+                    for (let i = 0; i < list.length; i++) {
+                        console.log(list[i].name);
+                        let opt =
+                            "<option value='" + list[i].code + "'>" + list[i].name + "</option>";
+                        $("#province-list").append(opt);
+
+                    }
+
+                }else{
+                    alert("欄位載入失敗");
+                }
+            }
+        });
+    }
+
+
+    //-------------------------------城市
+
     $("#btn-add-new-address").click(function () {
         $.ajax({
             url: "/addresses/add_new_address",
             type: "POST",
             data: $("#form-add-new-address").serialize(),
-            dataType: "json",
+            dataType: "JSON",
             success: function (json) {
                 if (json.state === 200) {
                     alert("新增收貨地址成功 ! ");

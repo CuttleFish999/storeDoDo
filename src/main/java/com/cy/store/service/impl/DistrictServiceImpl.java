@@ -22,11 +22,18 @@ public class DistrictServiceImpl implements IDistrictService {
          * 獲取到資料之後裡面的id跟parent就沒有作用了
          * 所以可以設置null,提升一點效率
          */
-        for(District d: list){
+        for (District d : list) {
             d.setId(null);
             d.setParent(null);
         }
         return list;
+    }
+
+//------------------------------------------------------------------------//
+
+    @Override
+    public String getNameByCode(String code) {
+        return districtMapper.findNameByCode(code);
     }
 
 

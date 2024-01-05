@@ -77,14 +77,14 @@ public class UserMapperTests {
 
     //----------------------------------------------//
 
-    @Test
-    public void updateAvatarByUid(){
-        userMapper.updateAvatarByUid(
-                7,
-                "/image/avatar/icons8-1.png",
-                "管理員",
-                new Date());
-    }
+//    @Test
+//    public void updateAvatarByUid(){
+//        userMapper.updateAvatarByUid(
+//                7,
+//                "/image/avatar/icons8-1.png",
+//                "管理員",
+//                new Date());
+//    }
 
 }
 

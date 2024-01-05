@@ -223,7 +223,13 @@
 <script type="text/javascript">
     $(document).ready(function () {
         console.log("cookie中的avatar=" + $.cookie("avatar"));
-        $("#img-avatar").attr("src", $.cookie("avatar"));
+        var avatar = $.cookie("avatar");
+
+        if (avatar) { // 如果有頭像，顯示頭像
+            $("#img-avatar").attr("src", avatar);
+        } else { // 如果沒有頭像，顯示預設圖片
+            $("#img-avatar").attr("src", "../images/avatar/icons8-1.png");
+        }
     });
 
     $("#btn-change-avatar").click(function () {
@@ -242,10 +248,9 @@
                     alert("更改頭像成功");
                     // 把後端傳來的頭像地址放到img的src屬性裡面
                     // attr(屬性, 給屬性的值)
-                    $("#img-avatar").attr("src", json.data);
+                    $("#img-avatar").attr("src", 'data:image/png;base64,' + json.data);
                     //把頭像存在cookie中
-                    $.cookie("avatar", json.data, {expires: 7});
-
+                    $.cookie("avatar", 'data:image/png;base64,' + json.data, {expires: 7});
                 } else {
                     alert("更改頭像失敗");
                 }

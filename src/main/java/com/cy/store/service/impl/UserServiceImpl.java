@@ -176,23 +176,40 @@ public void changePassword(Integer uid,
         }
     }
 //------------------------------------------------------------------------------------------------------//
+//    頭像方法測試
+public void changeAvatar(Integer uid, byte[] avatar,String username) {
+    User result = userMapper.findByUid(uid);
+    if (result == null || result.getIsDelete() == 1) {
+        throw new UserNotFoundException("會員不存在");
+    }
 
 
-    @Override
-    public void changeAvatar(Integer uid, String avatar, String username) {
-
-        //先查會員數據再不再
-        User result = userMapper.findByUid(uid);
-        if (result == null || result.getIsDelete() == 1) {
-            throw new UserNotFoundException("會員不存在");
-        }
-
-        Integer rows = userMapper.updateAvatarByUid(uid, avatar, username, new Date());
+        Integer rows = userMapper.updateAvatarByUid(uid, avatar, username  , new Date());
         if (rows != 1) {
             throw new UpdateException("更新會員大頭貼時產生未知的異常");
         }
 
-    }
+}
+
+
+//------------------------------------------------------------------------------------------------------//
+//
+//
+//    @Override
+//    public void changeAvatar(Integer uid, String avatar, String username) {
+//
+//        //先查會員數據再不再
+//        User result = userMapper.findByUid(uid);
+//        if (result == null || result.getIsDelete() == 1) {
+//            throw new UserNotFoundException("會員不存在");
+//        }
+//
+//        Integer rows = userMapper.updateAvatarByUid(uid, avatar, username, new Date());
+//        if (rows != 1) {
+//            throw new UpdateException("更新會員大頭貼時產生未知的異常");
+//        }
+//
+//    }
 
 //------------------------------------------------------------------------------------------------------//
 

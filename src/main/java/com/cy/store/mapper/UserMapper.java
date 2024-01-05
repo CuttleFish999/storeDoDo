@@ -81,7 +81,7 @@ public interface UserMapper {
      */
    Integer updateAvatarByUid(
            @Param("uid")Integer uid,
-           @Param("avatar") String avatar,
+           @Param("avatar") byte[] avatar,
            @Param("modifiedUser") String modifiedUser,
            @Param("modifiedTime")Date modifiedTime);
 

@@ -60,7 +60,7 @@ public interface IUserService {
      * @param username 會員名稱
      */
     void changeAvatar( Integer uid,
-                       String avatar,
+                       byte[] avatar,
                        String username);
     //--------------------------------------------------------//
 

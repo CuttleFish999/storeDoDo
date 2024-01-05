@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class AddressServiceImpl implements IAddressService {
@@ -22,7 +23,7 @@ public class AddressServiceImpl implements IAddressService {
     private IDistrictService districtService;
 
 
-    @Value("${user.address.max-count}")
+    @Value("20")
     private int maxCount;
 
 //------------------------------------------------------------------------//
@@ -41,7 +42,7 @@ public class AddressServiceImpl implements IAddressService {
         String cityName =  districtService.getNameByCode(address.getCityCode());
         String areaName =  districtService.getNameByCode(address.getAreaCode());
         address.setAddress(provinceName);
-        address.setName(cityName);
+        address.setCityName(cityName);
         address.setAreaName(areaName);
 
 
@@ -61,6 +62,29 @@ public class AddressServiceImpl implements IAddressService {
         if(rows != 1){
             throw new InsertException("新增用戶地址時出現未知的異常");
         }
+    }
+//------------------------------------------------------------------------//
+//從uid找到地址
+
+    @Override
+    public List<Address> getByUid(Integer uid) {
+        List<Address> list = addressMapper.findByUid(uid);
+        //更改一下回傳不需要那麼多,可以提升效率,不打不影響程式運作
+        for(Address address : list){
+            address.setAid(null);
+            address.setUid(null);
+            address.setProvinceCode(null);
+            address.setCityCode(null);
+            address.setAreaCode(null);
+            address.setTel(null);
+            address.setIsDefault(null);
+            address.setCreatedTime(null);
+            address.setCreatedUser(null);
+            address.setModifiedTime(null);
+            address.setModifiedUser(null);
+
+        }
+        return list;
     }
 
 

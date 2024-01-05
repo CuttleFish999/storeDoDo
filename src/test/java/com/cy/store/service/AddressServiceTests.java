@@ -18,9 +18,9 @@ public class AddressServiceTests {
     public void addNewAddress(){
         Address address = new Address();
         address.setPhone("0912121212");
-        address.setName("測試地址");
+        address.setName("澎湖縣");
 
-        addressService.addNewAddress(1,"地址新增測試",address);
+        addressService.addNewAddress(1,"test02",address);
     }
 
 }

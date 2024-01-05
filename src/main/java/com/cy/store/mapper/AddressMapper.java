@@ -2,6 +2,7 @@ package com.cy.store.mapper;
 
 
 import com.cy.store.entity.Address;
+import java.util.List;
 
 
 //收貨地址永續層介面
@@ -22,7 +23,12 @@ public interface AddressMapper {
     Integer countByUid(Integer uid);
 
 
-
+    /**
+     * 根據會員id查詢收貨地址
+     * @param uid 會員id
+     * @return 收貨地址
+     */
+    List<Address> findByUid(Integer uid);
 
 
 

@@ -68,7 +68,7 @@
         </form>
     </div>
 </div>
-<!--页脚开始-->
+<!--頁腳開始-->
 <footer class="footer">
     <!-- 私人訂製等-->
     <div class="text-center rights container">
@@ -89,11 +89,9 @@
             <p>@@@@</p>
         </div>
     </div>
-    <!--聯繫我們、下載客戶端等-->
     <div class="container beforeBottom">
         <div class="col-md-offset-1 col-md-3">
             <div><img src="../images/index/pro1.jpg" alt="" class="footLogo"/></div>
-            <!--					<div><img src="../images/index/footerFont.png" alt="" /></div>-->
         </div>
         <div class="col-md-4 callus text-center">
             <div class="col-md-4">
@@ -110,18 +108,18 @@
                     <li><a href="#"><p>關於我們</p></a></li>
                     <li><a href="#">關於租你好運</a></li>
                     <li><a href="#">聯繫我們</a></li>
-                    <li>
-                    </li>
                 </ul>
             </div>
         </div>
-
     </div>
     <!-- #footer底部 -->
     <div class="col-md-12 text-center bottom">
         中壢 A.K.A <a target="_blank" href="https://www.tibame.com/">Tibame公司</a>
         版權所有
     </div>
+    <!--    <img id="user-avatar" src="" alt="User Avatar" style="display: none;"/>-->
+    <!--    $("#user-avatar").attr("src", 'data:image/png;base64,' + json.data.avatar).show();-->
+    <!--    上面兩段是測試頭像有沒有拿到,下面那行要放到ajax裡面-->
 </footer>
 <!--footer結束-->
 <script type="text/javascript">
@@ -132,22 +130,17 @@
             data: $("#form-login").serialize(),
             dataType: "json",
             success: function (json) {
-                console.log(json);
                 if (json.state === 200) {
-                    alert("登錄成功");
+                    alert("歡迎");
                     //成功要跳轉到首頁index.
                     //相對路徑設定
-                    $.cookie("avatar", json.data.avatar, {expires: 7});
-                    console.log("cookie中的avatar=" + $.cookie("avatar"));
                     location.href = "index.html";
                     //再把後端返回的頭像存到cookie裡面
                 } else {
                     alert("登錄失敗");
                 }
             },
-            error: function (xhr) {
-                alert("登錄時產生未知的異常" + xhr.message);
-            }
+
         })
     })
 </script>

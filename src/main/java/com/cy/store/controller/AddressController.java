@@ -4,6 +4,7 @@ import com.cy.store.entity.Address;
 import com.cy.store.service.IAddressService;
 import com.cy.store.util.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,5 +33,26 @@ public class AddressController extends BassController {
 
     }
 
+    // 請求的參數如果一樣是 aid 會對應到方法參數 integer aid
+    //不一樣時就要使用 @PathVariable("aid") "aid"裡面輸入請求的參數名稱去設定
+    @RequestMapping("{aid}/set_default")
+    public JsonResult<Void> setDefault(@PathVariable("aid") Integer aid,
+                                       HttpSession session) {
+        Integer uid = getuidFromSession(session);
+        String username = getUsernameFromSession(session);
+
+        addressService.setDefault(aid, uid, username);
+        return new JsonResult<>(OK);
+    }
+
+    @RequestMapping("{aid}/delete")
+    public JsonResult<Void> delete(@PathVariable("aid") Integer aid,
+                                   HttpSession session) {
+        addressService.delete(aid,
+                getuidFromSession(session),
+                getUsernameFromSession(session));
+        return new JsonResult<>(OK);
+
+    }
 
 }

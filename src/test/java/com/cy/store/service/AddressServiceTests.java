@@ -16,12 +16,27 @@ public class AddressServiceTests {
 
     @Test
     public void addNewAddress(){
+        Integer uid = 2;
+        String username = "網站管理者";
         Address address = new Address();
-        address.setPhone("0912121212");
-        address.setName("澎湖縣");
-
-        addressService.addNewAddress(1,"test02",address);
+        address.setName("小王");
+        address.setPhone("0980808080");
+        address.setAddress("小王村1號");
+        addressService.addNewAddress(uid, username, address);
+        System.out.println("OK.");
     }
+
+    @Test
+    public void setDefault(){
+        addressService.setDefault(9,2,"網站管理員");
+    }
+
+
+    @Test
+    public void delete(){
+        addressService.delete(9,2,"測試刪除");
+    }
+
 
 }
 

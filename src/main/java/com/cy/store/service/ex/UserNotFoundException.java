@@ -1,6 +1,8 @@
 package com.cy.store.service.ex;
 
-/** 會員資料不存在的異常 */
+/**
+ * 會員資料不存在的異常
+ */
 public class UserNotFoundException extends ServiceException {
     public UserNotFoundException() {
         super();

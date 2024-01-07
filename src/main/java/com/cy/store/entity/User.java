@@ -18,6 +18,9 @@ public class User extends BaseEntity implements Serializable {
     private Integer gender;
     private byte[] avatar;
     private Integer isDelete;
+//--------------------圖片---------------------------------------//
+//    private String avatar64;
+//--------------------圖片---------------------------------------//
 
     public Integer getUid() {
         return uid;
@@ -82,6 +85,17 @@ public class User extends BaseEntity implements Serializable {
     public void setAvatar(byte[] avatar) {
         this.avatar = avatar;
     }
+
+//--------------------圖片---------------------------------------//
+//
+//    public String getAvatar64() {
+//        return avatar64;
+//    }
+//
+//    public void setAvatar64(String avatar64) {
+//        this.avatar64 = avatar64;
+//    }
+//--------------------圖片---------------------------------------//
 
     public Integer getIsDelete() {
         return isDelete;

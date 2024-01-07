@@ -12,4 +12,23 @@ public interface IAddressService {
 
 
     List<Address> getByUid(Integer uid);
+
+
+    /**
+     * 修改傳進來的會員id的某一條收貨地址aid為預設收貨地址
+     * @param aid 收貨地址id
+     * @param uid 會員id
+     * @param username 修改人名稱
+     */
+    void setDefault(Integer aid,Integer uid,String username);
+
+
+    /**
+     * 刪除會員點選的收貨地址資料
+     * @param aid 收貨地址編號
+     * @param uid 會員id
+     * @param username 會員名稱
+     */
+    void delete(Integer aid,Integer uid,String username);
+
 }

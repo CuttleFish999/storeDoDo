@@ -4,17 +4,34 @@ package com.cy.store.controller;
 import com.cy.store.controller.ex.*;
 import com.cy.store.service.ex.*;
 import com.cy.store.util.JsonResult;
+import org.springframework.cglib.transform.impl.AddInitTransformer;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.servlet.http.HttpSession;
 
 //控制層的父類, 用來統一做異常處理
 public class BassController {
-
-    //----------------------處理統一的異常-----------------------//
     //操作成功的狀態碼
     public static final int OK = 200;
+    //---------------------設定session-------------------------//
+    /**
+     * 拿到session裡面的uid
+     * @param session session變數
+     * @return 當前登錄的會員uid的值
+     */
+    public final Integer getuidFromSession(HttpSession session) {
+        return Integer.valueOf(session.getAttribute("uid").toString());
+    }
+    /**
+     * 拿到當前登錄會員的username
+     * @param session session變數
+     * @return 當前登錄會員的username
+     */
+    public final String getUsernameFromSession(HttpSession session) {
+        return session.getAttribute("username").toString();
+    }
 
+    //----------------------處理統一的異常-----------------------//
 
     // 當專案有異常, 會被統一攔截到這個請求處理方法, 方法的回傳值會直接傳給前端
     // 自動將異常傳遞給這個方法的參數上
@@ -33,13 +50,22 @@ public class BassController {
         } else if (e instanceof AddressCountLimitException) {
             result.setState(4003);
             result.setMessage("收貨地址數量超過上限");
+        } else if (e instanceof AddressNotFoundException) {
+            result.setState(4004);
+            result.setMessage("收貨地址不存在");
+        } else if (e instanceof AccessDeniedException) {
+            result.setState(4005);
+            result.setMessage("收貨地址更新錯誤,使用者沒有權限");
         } else if (e instanceof InsertException) {
             result.setState(5000);
             result.setMessage("註冊時產生未知的異常");
         } else if (e instanceof UpdateException) {
             result.setState(5001);
             result.setMessage("更新時產生未知的異常");
-        } else if (e instanceof FileEmptyException) {
+        } else if (e instanceof DeleteException) {
+            result.setState(5002);
+            result.setMessage("刪除時產生未知的異常");
+        }else if (e instanceof FileEmptyException) {
             result.setState(6000);
             result.setMessage("檔案是空的");
         } else if (e instanceof FileSizeException) {
@@ -61,28 +87,7 @@ public class BassController {
     }
 
 
-    //---------------------設定session-------------------------//
 
-    /**
-     * 拿到session裡面的uid
-     *
-     * @param session session變數
-     * @return 當前登錄的會員uid的值
-     */
-    public final Integer getuidFromSession(HttpSession session) {
-        return Integer.valueOf(session.getAttribute("uid")
-                .toString());
-    }
-
-    /**
-     * 拿到當前登錄會員的username
-     *
-     * @param session session變數
-     * @return 當前登錄會員的username
-     */
-    public final String getUsernameFromSession(HttpSession session) {
-        return session.getAttribute("username").toString();
-    }
 
 
 }

@@ -2,7 +2,7 @@ package com.cy.store.service.ex;
 
 
 // update產生的異常
-public class UpdateException  extends  ServiceException{
+public class UpdateException extends ServiceException {
     public UpdateException() {
         super();
     }

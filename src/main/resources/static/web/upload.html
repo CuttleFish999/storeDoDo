@@ -217,20 +217,32 @@
         中壢 A.K.A <a target="_blank" href="https://www.tibame.com/">Tibame公司</a>
         版權所有
     </div>
+<!--    <img id="user-avatar" src="" alt="User Avatar" style="display: none;"/>-->
+<!--    $("#user-avatar").attr("src", 'data:image/png;base64,' + json.data.avatar).show();-->
+<!--    上面兩段是測試頭像有沒有拿到,下面那行要放到ajax裡面-->
 </footer>
 <!--footer結束-->
 
 <script type="text/javascript">
     $(document).ready(function () {
-        console.log("cookie中的avatar=" + $.cookie("avatar"));
-        var avatar = $.cookie("avatar");
+        $.ajax({
+            url: "/users/get_by_uid",
+            type: "POST",
+            dataType: "JSON",
+            success: function (json) {
+                // 檢查 avatar 存不存在或null
+                if (json.data && json.data.avatar) {
+                    // 替換 <img> 的 src 属性
+                    $("#img-avatar").attr("src", 'data:image/png;base64,' + json.data.avatar);
+                } else {
+                    // 如果 avatar 是 null，保持 <img> 的默認圖片
+                    $("#img-avatar").attr("src", "../images/index/user.jpg");
+                }
+            },
+        });
 
-        if (avatar) { // 如果有頭像，顯示頭像
-            $("#img-avatar").attr("src", avatar);
-        } else { // 如果沒有頭像，顯示預設圖片
-            $("#img-avatar").attr("src", "../images/avatar/icons8-1.png");
-        }
     });
+
 
     $("#btn-change-avatar").click(function () {
         $.ajax({
@@ -255,8 +267,8 @@
                     alert("更改頭像失敗");
                 }
             },
-            error: function (xhr) {
-                alert("更改頭像時產生未知的異常" + xhr.message);
+            error: function (json) {
+                alert("更改頭像時產生未知的異常" + json.message);
             }
 
 

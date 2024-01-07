@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
+import java.sql.Blob;
 import java.util.Date;
 import java.util.UUID;
 
@@ -148,7 +149,10 @@ public void changePassword(Integer uid,
         user.setUsername(result.getUsername());
         user.setPhone(result.getPhone());
         user.setEmail(result.getEmail());
-        user.setGender(result.getGender());
+//----------------------圖片------------------------------------
+        user.setAvatar(result.getAvatar());
+//--------------------------------圖片---------------------------------------
+
         return user;
     }
 

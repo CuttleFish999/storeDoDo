@@ -1,6 +1,8 @@
 package com.cy.store.service.ex;
 
-/** 密碼驗證失敗的異常 */
+/**
+ * 密碼驗證失敗的異常
+ */
 public class PasswordNotMatchException extends ServiceException {
     public PasswordNotMatchException() {
         super();

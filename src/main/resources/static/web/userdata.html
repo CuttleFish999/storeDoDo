@@ -250,7 +250,6 @@
         $.ajax({
             url: "/users/get_by_uid",
             type: "GET",
-            data: $("#form-change-info").serialize(),
             dataType: "JSON",
             success: function (json) {
                 if (json.state === 200) {
@@ -274,8 +273,8 @@
                     alert("會員不存在");
                 }
             },
-            error: function (xhr) {
-                alert("查詢會員資料時產生未知的問題" + xhr.message);
+            error: function (json) {
+                alert("查詢會員資料時產生未知的問題" + json.message);
             }
 
 
@@ -299,8 +298,8 @@
                     alert("更改個人資料失敗");
                 }
             },
-            error: function (xhr) {
-                alert("更改個人資料時發現未知的異常" + xhr.message);
+            error: function (json) {
+                alert("更改個人資料時發現未知的異常" + json.message);
                 location.href = "login.html";
 
             }

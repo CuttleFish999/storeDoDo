@@ -43,6 +43,15 @@ public class UserController extends BassController {
                                   HttpSession session) {
         User data = userService.login(username, password);
 
+//        if (data.getAvatar() != null) {
+//            // 將字節數組轉換為 Base64 編碼字符串
+//            String avatar64 = Base64.getEncoder().encodeToString(data.getAvatar());
+//
+//            // 設置 Base64 字符串到用戶的 avatar 屬性
+//            data.setAvatar64(avatar64);
+//        }
+
+
         // 把數據放到session裡面
         session.setAttribute("uid", data.getUid());
         session.setAttribute("username", data.getUsername());
@@ -71,6 +80,11 @@ public class UserController extends BassController {
     @RequestMapping("get_by_uid")
     public JsonResult<User> getByUid(HttpSession session) {
         User data = userService.getByUid(getuidFromSession(session));
+
+
+//--------------------------------圖片---------------------------------------
+        session.setAttribute("avatar",data.getAvatar());
+//--------------------------------圖片---------------------------------------
         return new JsonResult<>(OK, data);
     }
 //------------------------------------------------------------------------//

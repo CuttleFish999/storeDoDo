@@ -1,12 +1,14 @@
 package com.cy.store.mapper;
 
 import com.cy.store.entity.Address;
+import org.apache.ibatis.annotations.Param;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Date;
 import java.util.List;
 
 // @RunWith(SpringRunner.class)注解是一个測試啟動器，
@@ -38,6 +40,35 @@ public class AddressMapperTest {
         List<Address> list =  addressMapper.findByUid(1);
         System.out.println(list);
     }
+
+
+    @Test
+    public void findByAid(){
+        System.out.println( addressMapper.findByAid(5));
+
+    };
+    @Test
+    public void  updateNonDefault(){
+        addressMapper.updateNonDefault(2);
+
+    };
+    @Test
+    public void  updateDefaultByAid(){
+        addressMapper.updateDefaultByAid(9,"測試預設修改",new Date());
+
+    };
+
+    @Test
+    public void deleteByAid(){
+        addressMapper.deleteByAid(8);
+    }
+
+    @Test
+    public void findLastModified(){
+        System.out.println(addressMapper.findLastModified(2));
+
+    }
+
 
 }
 

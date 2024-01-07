@@ -386,13 +386,13 @@
             success: function (json) {
                 if (json.state === 200) {
                     alert("新增收貨地址成功 ! ");
-
+                    location.href = "address.html";
                 } else {
                     alert("新增收貨地址失敗 ! ");
                 }
             },
-            error: function (xhr) {
-                alert("新增收貨地址時發生未知的異常 ! " + xhr.status)
+            error: function (json) {
+                alert("新增收貨地址時發生未知的異常 ! " + json.status)
             }
         });
     });

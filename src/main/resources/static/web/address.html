@@ -291,7 +291,7 @@
 
     //--------------刪除地址按鈕方法---------------------//
     function deleteByAid(aid) {
-        if (confirm("確定要刪除這個收貨地址嗎?")) {
+        if (confirm("確定要刪除這個收貨地址嗎 ?")) {
             $.ajax({
                 url: "/addresses/" + aid + "/delete",
                 type: "POST",

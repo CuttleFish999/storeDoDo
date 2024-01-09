@@ -54,7 +54,7 @@ public class AddressMapperTest {
     };
     @Test
     public void  updateDefaultByAid(){
-        addressMapper.updateDefaultByAid(9,"測試預設修改",new Date());
+        addressMapper.updateDefaultByAid(11,"測試預設修改",new Date());
 
     };
 

@@ -226,17 +226,6 @@
                 <ul>
                     <li>
                         <a href="#">
-                            <p>商家帮助</p>
-                        </a>
-                    </li>
-                    <li><a href="#">商家入驻</a></li>
-                    <li><a href="#">商家后台</a></li>
-                </ul>
-            </div>
-            <div class="col-md-4">
-                <ul>
-                    <li>
-                        <a href="#">
                             <p>關於我們</p>
                         </a>
                     </li>
@@ -269,6 +258,7 @@
             success: function (json) {
                 if (json.state === 200) {
                     let list = json.data;
+                    console.log(list);
                     // console.log("count=" + list.length);
                     for (let i = 0; i < list.length; i++) {
                         let tr = '<tr>\n' +
@@ -278,7 +268,7 @@
                             '<td>#{phone}</td>\n' +
                             '<td><a class="btn btn-xs btn-info"><span class="fa fa-edit"></span> 修改</a></td>\n' +
                             '<td><a onclick="deleteByAid(#{aid})" class="btn btn-xs add-del btn-info"><span class="fa fa-trash-o"></span> 刪除</a></td>\n' +
-                            '<td><a onclick="setDefault(#{aid})" class="btn btn-xs add-def btn-default">設定默認</a></td>\n' +
+                            '<td><a onclick="setDefault(#{aida})" class="btn btn-xs add-def btn-default">設定默認</a></td>\n' +
                             '</tr>';
 
                         tr = tr.replace("#{tag}", list[i].tag);
@@ -286,6 +276,7 @@
                         tr = tr.replace("#{address}", list[i].address);
                         tr = tr.replace("#{phone}", list[i].phone);
                         tr = tr.replace("#{aid}", list[i].aid);
+                        tr = tr.replace("#{aida}", list[i].aid);
 
                         $("#address-list").append(tr);
                     }
@@ -297,6 +288,7 @@
             }
         });
     }
+
     //--------------刪除地址按鈕方法---------------------//
     function deleteByAid(aid) {
         $.ajax({
@@ -317,8 +309,6 @@
         });
 
     }
-
-
 
     //--------------默認地址按鈕方法---------------------//
     function setDefault(aid) {
@@ -342,7 +332,5 @@
 
 </script>
 
-
 </body>
-
 </html>

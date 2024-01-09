@@ -291,43 +291,47 @@
 
     //--------------刪除地址按鈕方法---------------------//
     function deleteByAid(aid) {
-        $.ajax({
-            url: "/addresses/" + aid + "/delete",
-            type: "POST",
-            dataType: "JSON",
-            success: function (json) {
-                if (json.state === 200) {
-                    //重新載入列表
-                    showAddressList();
-                } else {
-                    alert("刪除收貨地址失敗");
+        if (confirm("確定要刪除這個收貨地址嗎?")) {
+            $.ajax({
+                url: "/addresses/" + aid + "/delete",
+                type: "POST",
+                dataType: "JSON",
+                success: function (json) {
+                    if (json.state === 200) {
+                        //重新載入列表
+                        showAddressList();
+                    } else {
+                        alert("刪除收貨地址失敗");
+                    }
+                },
+                error: function (json) {
+                    alert("刪除地址時產生未知的異常" + json.message);
                 }
-            },
-            error: function (json) {
-                alert("刪除地址時產生未知的異常" + json.message);
-            }
-        });
+            });
+        }
 
     }
 
     //--------------默認地址按鈕方法---------------------//
     function setDefault(aid) {
-        $.ajax({
-            url: "/addresses/" + aid + "/set_default",
-            type: "POST",
-            dataType: "JSON",
-            success: function (json) {
-                if (json.state === 200) {
-                    //重新載入列表
-                    showAddressList();
-                } else {
-                    alert("設定默認地址失敗");
+        if (confirm("確定要把此地址設定默認嗎？")) {
+            $.ajax({
+                url: "/addresses/" + aid + "/set_default",
+                type: "POST",
+                dataType: "JSON",
+                success: function (json) {
+                    if (json.state === 200) {
+                        //重新載入列表
+                        showAddressList();
+                    } else {
+                        alert("設定默認地址失敗");
+                    }
+                },
+                error: function (json) {
+                    alert("設定默認地址產生未知的異常" + json.message);
                 }
-            },
-            error: function (json) {
-                alert("設定默認地址產生未知的異常" + json.message);
-            }
-        });
+            });
+        }
     }
 
 </script>

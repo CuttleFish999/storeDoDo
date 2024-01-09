@@ -52,7 +52,7 @@ public class UserController extends BassController {
 //        }
 
 
-        // 把數據放到session裡面
+         // 把數據放到session裡面
         session.setAttribute("uid", data.getUid());
         session.setAttribute("username", data.getUsername());
         session.setAttribute("avatar",data.getAvatar());

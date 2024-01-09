@@ -28,11 +28,12 @@ public class LoginInterceptorConfigurer implements WebMvcConfigurer {
         patterns.add("/js/**");
         patterns.add("/web/register.html");
         patterns.add("/web/login.html");
-        patterns.add("/web/lndex.html");
+        patterns.add("/web/index.html");
         patterns.add("/web/product.html");
         patterns.add("/users/reg");
         patterns.add("/users/login");
         patterns.add("/districts/**");
+        patterns.add("/products/**");
 
         registry.addInterceptor(interceptor) //註冊
             .addPathPatterns("/**") //黑名單

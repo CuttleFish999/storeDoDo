@@ -14,16 +14,20 @@ public class BassController {
     //操作成功的狀態碼
     public static final int OK = 200;
     //---------------------設定session-------------------------//
+
     /**
      * 拿到session裡面的uid
+     *
      * @param session session變數
      * @return 當前登錄的會員uid的值
      */
     public final Integer getuidFromSession(HttpSession session) {
         return Integer.valueOf(session.getAttribute("uid").toString());
     }
+
     /**
      * 拿到當前登錄會員的username
+     *
      * @param session session變數
      * @return 當前登錄會員的username
      */
@@ -56,6 +60,9 @@ public class BassController {
         } else if (e instanceof AccessDeniedException) {
             result.setState(4005);
             result.setMessage("收貨地址更新錯誤,使用者沒有權限");
+        } else if (e instanceof ProductNotFoundException) {
+            result.setState(4006);
+            result.setMessage("商品資料不存在");
         } else if (e instanceof InsertException) {
             result.setState(5000);
             result.setMessage("註冊時產生未知的異常");
@@ -65,7 +72,7 @@ public class BassController {
         } else if (e instanceof DeleteException) {
             result.setState(5002);
             result.setMessage("刪除時產生未知的異常");
-        }else if (e instanceof FileEmptyException) {
+        } else if (e instanceof FileEmptyException) {
             result.setState(6000);
             result.setMessage("檔案是空的");
         } else if (e instanceof FileSizeException) {
@@ -85,9 +92,6 @@ public class BassController {
 
         return result;
     }
-
-
-
 
 
 }

@@ -10,9 +10,9 @@ import java.util.List;
 public interface IDistrictService {
 
     /**
-     * 根據父代號查詢省市區資料
+     * 根據父代號查詢國家,市,區資料
      * @param parent 父代號
-     * @return 多個省市區資料
+     * @return 多個國家,市,區資料
      */
     List<District> getByParent(String parent);
 

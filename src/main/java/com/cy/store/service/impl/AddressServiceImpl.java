@@ -68,20 +68,20 @@ public class AddressServiceImpl implements IAddressService {
     public List<Address> getByUid(Integer uid) {
         List<Address> list = addressMapper.findByUid(uid);
         //更改一下回傳不需要那麼多,可以提升效率,不打不影響程式運作
-        for (Address address : list) {
-            //address.setAid(null);
-            //address.setUid(null);
-            address.setProvinceCode(null);
-            address.setCityCode(null);
-            address.setAreaCode(null);
-            address.setTel(null);
-            address.setIsDefault(null);
-            address.setCreatedTime(null);
-            address.setCreatedUser(null);
-            address.setModifiedTime(null);
-            address.setModifiedUser(null);
-
-        }
+//        for (Address address : list) {
+//            //address.setAid(null);
+//            //address.setUid(null);
+//            address.setProvinceCode(null);
+//            address.setCityCode(null);
+//            address.setAreaCode(null);
+//            address.setTel(null);
+//            address.setIsDefault(null);
+//            address.setCreatedTime(null);
+//            address.setCreatedUser(null);
+//            address.setModifiedTime(null);
+//            address.setModifiedUser(null);
+//
+//        }
         return list;
     }
 

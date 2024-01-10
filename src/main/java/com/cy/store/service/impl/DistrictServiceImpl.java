@@ -10,6 +10,7 @@ import java.util.List;
 
 @Service
 public class DistrictServiceImpl implements IDistrictService {
+
     @Autowired
     private DistrictMapper districtMapper;
 

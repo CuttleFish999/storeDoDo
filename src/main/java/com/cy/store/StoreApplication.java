@@ -12,7 +12,7 @@ import org.springframework.util.unit.DataUnit;
 import javax.servlet.MultipartConfigElement;
 
 
-@Configuration
+//@Configuration
 @SpringBootApplication
 @MapperScan("com.cy.store.mapper")
 //指定當前專案中的mapper介面的位置
@@ -22,14 +22,14 @@ public class StoreApplication {
         SpringApplication.run(StoreApplication.class, args);
     }
 
-    @Bean
-    public MultipartConfigElement getMultipartConfigElement() {
-        //new 一個來設定的工廠
-        MultipartConfigFactory factory = new MultipartConfigFactory();
-        //設定工廠接收的檔案大小,跟請求的大小
-        factory.setMaxFileSize(DataSize.of(10, DataUnit.MEGABYTES));
-        factory.setMaxRequestSize(DataSize.of(10, DataUnit.MEGABYTES));
-        //通過工廠來創建一個 MultipartConfigElement
-        return factory.createMultipartConfig();
-    }
+//    @Bean
+//    public MultipartConfigElement getMultipartConfigElement() {
+//        //new 一個來設定的工廠
+//        MultipartConfigFactory factory = new MultipartConfigFactory();
+//        //設定工廠接收的檔案大小,跟請求的大小
+//        factory.setMaxFileSize(DataSize.of(20, DataUnit.MEGABYTES));
+//        factory.setMaxRequestSize(DataSize.of(10, DataUnit.MEGABYTES));
+//        //通過工廠來創建一個 MultipartConfigElement
+//        return factory.createMultipartConfig();
+//    }
 }

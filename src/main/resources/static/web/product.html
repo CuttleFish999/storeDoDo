@@ -315,6 +315,31 @@
             }
         });
     });
+
+    $("#btn-add-to-cart").click(function () {
+        $.ajax({
+            url: "/carts/add_to_cart",
+            type: "POST",
+            data: {
+                "pid": id,
+                "amount": $("#num").val()
+            },
+            dataType: "JSON",
+            success: function (json) {
+                if (json.state == 200) {
+                    alert("加入購物車成功!");
+                } else {
+                    alert("加入購物車失敗" + json.message);
+                }
+            },
+            error: function (xhr) {
+                alert("登入已過期,請重新登錄" + xhr.message);
+                location.href = "login.html";
+            }
+        });
+    });
+
+
 </script>
 </body>
 

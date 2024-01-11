@@ -283,7 +283,7 @@
                         + '<td>#{title}#{msg}</td>'
                         + '<td>$<span id="price-#{cid}">#{realPrice}</span></td>'
                         + '<td>'
-                        + '<input type="button" value="-" class="num-btn"onclick="reduceNum(1)" />'
+                        + '<input type="button" value="-" class="num-btn"onclick="reduceNum(#{cida})" />'
                         + '<input id="num-#{cid}" type="text" size="2"readonly="readonly" class="num-text" value="#{num}">'
                         + '<input class="num-btn" type="button" value="+"onclick="addNum(#{cid})" />'
                         + '</td>'
@@ -292,6 +292,7 @@
                         + '<input type="button" onclick="delCartItem(this)"class="cart-del btn btn-default btn-xs" value="删除" />'
                         + '</td>'
                         + '</tr>';
+                    tr = tr.replace(/#{cida}/g, list[i].cid);
                     tr = tr.replace(/#{cid}/g, list[i].cid);
                     tr = tr.replace(/#{title}/g, list[i].title);
                     tr = tr.replace(/#{image}/g, list[i].image);
@@ -330,6 +331,31 @@
                     let price = $("#price-" + cid).html();
                     let totalPrice = price * json.data;
                     $("#total-price-" + cid).html(totalPrice);
+                } else {
+                    alert("增加購物車數量失敗" + json.message);
+                }
+            },
+            error: function (xhr) {
+                alert("請重新登錄" + xhr.message);
+                location.href = "login.html";
+            }
+
+        });
+    }
+
+
+    function reduceNum(cida) {
+        $.ajax({
+            url: "/carts/" + cida + "/num/reduce",
+            type: "POST",
+            dataType: "JSON",
+            success: function (json) {
+
+                if (json.state == 200) {
+                    $("#num-" + cida).val(json.data);
+                    let price = $("#price-" + cida).html();
+                    let totalPrice = price * json.data;
+                    $("#total-price-" + cida).html(totalPrice);
                 } else {
                     alert("增加購物車數量失敗" + json.message);
                 }

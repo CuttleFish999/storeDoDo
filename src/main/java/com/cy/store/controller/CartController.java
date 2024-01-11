@@ -32,7 +32,7 @@ public class CartController extends BassController {
 
     @RequestMapping({"", "/"})
     public JsonResult<List<CartVO>> getVOByUid(HttpSession session) {
-        //從session抓uid出來
+        //從session取uid出來
         Integer uid = getuidFromSession(session);
         //再把找出來的uid給service去找資料
         List<CartVO> data = cartService.getVOByUid(uid);
@@ -50,6 +50,19 @@ public class CartController extends BassController {
         String username = getUsernameFromSession(session);
         //再去傳給service執行方法增加數量
         Integer data = cartService.addNum(cid, uid, username);
+        return new JsonResult<Integer>(OK, data);
+
+    }
+
+    @PostMapping("{cid}/num/reduce")
+    public JsonResult<Integer> reduceNum(@PathVariable("cid") Integer cid,
+                                      HttpSession session) {
+
+        //先從session拿到uid跟username
+        Integer uid = getuidFromSession(session);
+        String username = getUsernameFromSession(session);
+        //再去傳給service執行方法減少數量
+        Integer data = cartService.reduceNum(cid, uid, username);
         return new JsonResult<Integer>(OK, data);
 
     }

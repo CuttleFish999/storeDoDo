@@ -24,4 +24,7 @@ public interface ICartService {
 
     Integer addNum(Integer cid, Integer uid, String username);
 
+    Integer reduceNum(Integer cid, Integer uid, String username);
+
+
 }

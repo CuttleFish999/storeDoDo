@@ -59,9 +59,9 @@ public class CartServiceImpl implements ICartService {
         } else { //表示購物車表格有這個商品,所以更新他的數量num
             Integer num = result.getNum() + amount;
             //這邊沒有cid要靠上面的result裡面拿
-            Integer rows =  cartMapper.updateNumByCid(result.getCid(), num, username, date);
+            Integer rows = cartMapper.updateNumByCid(result.getCid(), num, username, date);
 
-            if(rows != 1){
+            if (rows != 1) {
                 throw new UpdateException("更新購物車時發生異常");
             }
 
@@ -74,30 +74,46 @@ public class CartServiceImpl implements ICartService {
         return cartMapper.findVOByUid(uid);
     }
 
+    //購物車前端頁面"+"數量
     @Override
     public Integer addNum(Integer cid, Integer uid, String username) {
         //先拿到cid
         Cart result = cartMapper.findByCid(cid);
         //如果是null會丟異常購物車不存在
-        if(result == null){
+        if (result == null) {
             throw new CartNotFoundException("購物車不存在");
         }
 
         //在查結果的uid跟參數uid有沒有布一樣
-        if(!result.getUid().equals(uid)){
+        if (!result.getUid().equals(uid)) {
             throw new AccessDeniedException("目前會員id與登錄會員id不一致");
         }
 
         //根據查到的結果如果有一個的,數量取出來 +1
-        Integer num =  result.getNum()+1;
+        Integer num = result.getNum() + 1;
 
         Date date = new Date();
         //再用cartMapper裡面的updateNumByCid來找到數量更新
-        Integer rows =   cartMapper.updateNumByCid(cid,num,username,date);
-        if(rows != 1){
+        Integer rows = cartMapper.updateNumByCid(cid, num, username, date);
+        if (rows != 1) {
             throw new InsertException("修改數量有問題");
         }
 
+        return num;
+    }
+
+    //購物車前端頁面"-"數量
+    @Override
+    public Integer reduceNum(Integer cid, Integer uid, String username) {
+
+        Cart result = cartMapper.findByCid(cid);
+        
+        Integer num = result.getNum() - 1;
+        Date date = new Date();
+        Integer rows = cartMapper.updateNumByCid(cid, num, username, date);
+        if (rows != 1) {
+            throw new InsertException("修改數量有問題");
+        }
         return num;
     }
 }

@@ -1,6 +1,7 @@
 package com.cy.store.service;
 
 import com.cy.store.entity.District;
+import com.cy.store.vo.CartVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,29 @@ public class CartServiceTests {
                 5,
                 "測試總數");
     }
+
+    @Test
+    public void getVOByUid() {
+        List<CartVO> list = cartService.getVOByUid(2);
+        //看筆數
+        System.out.println("count=" + list.size());
+        for (CartVO c : list) {
+            System.out.println(c);
+        }
+
+    }
+
+    @Test
+    public void addNum(){
+
+        Integer cid = 2;
+        Integer uid = 2;
+        String username = "購物車數量";
+        Integer num = cartService.addNum(cid,uid,username);
+        System.out.println(num);
+    }
+
+
 }
 
 

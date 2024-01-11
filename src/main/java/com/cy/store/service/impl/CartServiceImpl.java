@@ -5,12 +5,16 @@ import com.cy.store.entity.Product;
 import com.cy.store.mapper.CartMapper;
 import com.cy.store.mapper.ProductMapper;
 import com.cy.store.service.ICartService;
+import com.cy.store.service.ex.AccessDeniedException;
+import com.cy.store.service.ex.CartNotFoundException;
 import com.cy.store.service.ex.InsertException;
 import com.cy.store.service.ex.UpdateException;
+import com.cy.store.vo.CartVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class CartServiceImpl implements ICartService {
@@ -62,5 +66,38 @@ public class CartServiceImpl implements ICartService {
             }
 
         }
+    }
+
+    @Override
+    public List<CartVO> getVOByUid(Integer uid) {
+
+        return cartMapper.findVOByUid(uid);
+    }
+
+    @Override
+    public Integer addNum(Integer cid, Integer uid, String username) {
+        //先拿到cid
+        Cart result = cartMapper.findByCid(cid);
+        //如果是null會丟異常購物車不存在
+        if(result == null){
+            throw new CartNotFoundException("購物車不存在");
+        }
+
+        //在查結果的uid跟參數uid有沒有布一樣
+        if(!result.getUid().equals(uid)){
+            throw new AccessDeniedException("目前會員id與登錄會員id不一致");
+        }
+
+        //根據查到的結果如果有一個的,數量取出來 +1
+        Integer num =  result.getNum()+1;
+
+        Date date = new Date();
+        //再用cartMapper裡面的updateNumByCid來找到數量更新
+        Integer rows =   cartMapper.updateNumByCid(cid,num,username,date);
+        if(rows != 1){
+            throw new InsertException("修改數量有問題");
+        }
+
+        return num;
     }
 }

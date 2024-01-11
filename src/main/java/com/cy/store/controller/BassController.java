@@ -63,7 +63,10 @@ public class BassController {
         } else if (e instanceof ProductNotFoundException) {
             result.setState(4006);
             result.setMessage("商品資料不存在");
-        } else if (e instanceof InsertException) {
+        } else if (e instanceof CartNotFoundException) {
+            result.setState(4007);
+            result.setMessage("購物車不存在");
+        }else if (e instanceof InsertException) {
             result.setState(5000);
             result.setMessage("註冊時產生未知的異常");
         } else if (e instanceof UpdateException) {

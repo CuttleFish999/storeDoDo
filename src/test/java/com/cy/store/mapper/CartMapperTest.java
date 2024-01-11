@@ -1,6 +1,7 @@
 package com.cy.store.mapper;
 
 import com.cy.store.entity.Cart;
+import com.cy.store.vo.CartVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
+import java.util.List;
 
 // @RunWith(SpringRunner.class)注解是一个測試啟動器，
 // 可以載入Springboot測試的註解
@@ -40,5 +42,18 @@ public class CartMapperTest {
         System.out.println(cart);
     }
 
+    @Test
+    public void findVOByUid(){
+        List<CartVO> list =  cartMapper.findVOByUid(2);
+        System.out.println(list);
+    }
+
+
+    @Test
+    public void findByCid(){
+        Integer cid = 4;
+        Cart result = cartMapper.findByCid(cid);
+        System.out.println(result);
+    }
 }
 

@@ -4,7 +4,7 @@ function addNum(rid) {
 	$("#goodsCount"+rid).val(n + 1);
 	calcRow(rid);
 }
-/*按减号数量减*/
+/*案減號數量減*/
 function reduceNum(rid) {
 	var n = parseInt($("#goodsCount"+rid).val());
 	if (n == 0)
@@ -12,7 +12,7 @@ function reduceNum(rid) {
 	$("#goodsCount"+rid).val(n - 1);
 	calcRow(rid);
 }
-/*全选全不选*/
+/*全選或不選*/
 function checkall(ckbtn) {
 	$(".ckitem").prop("checked", $(ckbtn).prop("checked"));
 	//calcTotal();
@@ -36,22 +36,22 @@ function selDelCart() {
 	//calcTotal();
 }
 $(function() {
-	//单选一个也得算价格
+	//單選一個也要算價格
 	$(".ckitem").click(function() {
 			//calcTotal();
 		})
-		//开始时计算价格
+		//開始時就算價格
 		//calcTotal();
 })
-//计算单行小计价格的方法
+//計算小季
 function calcRow(rid) {
-	//取单价
+	//拿單價
 	var vprice = parseFloat($("#goodsPrice"+rid).html());
-	//取数量
+	//取數量
 	var vnum = parseFloat($("#goodsCount"+rid).val());
 	//小计金额
 	var vtotal = vprice * vnum;
-	//赋值
+	//給他一個職
 	$("#goodsCast"+rid).html("¥" + vtotal);
 }
 //计算总价格的方法

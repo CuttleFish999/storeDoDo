@@ -6,14 +6,14 @@ import org.apache.ibatis.annotations.Param;
 import java.util.Date;
 
 /**
- * 處理會員資料連接的持久層介面
+ * 會員資料的介面
  */
 
 public interface UserMapper {
 //----------------------------------------------//
 
     /**
-     * 插入使用者數據
+     * 新增使用者數據
      *
      * @param user 會員
      * @return 產生多少筆資料
@@ -34,7 +34,7 @@ public interface UserMapper {
     //----------------------------------------------//
 
     /**
-     * 根據用戶uid來修改密碼
+     * 根據會員uid來修改密碼
      *
      * @param uid          會員id
      * @param password     會員輸入的新密碼

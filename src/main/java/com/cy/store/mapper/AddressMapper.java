@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 
-//收貨地址永續層介面
+//收貨地址介面
 public interface AddressMapper {
     /**
      * 新增會員收貨地址

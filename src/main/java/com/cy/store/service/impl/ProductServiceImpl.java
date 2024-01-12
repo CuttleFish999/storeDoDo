@@ -20,15 +20,6 @@ public class ProductServiceImpl implements IProductService {
     public List<Product> findHostList() {
         List<Product> list = productMapper.findHotList();
 
-        //降低傳輸的資料大小,不寫也可以
-        for (Product product : list) {
-            product.setPriority(null);
-            product.setCreatedUser(null);
-            product.setCreatedTime(null);
-            product.setModifiedUser(null);
-            product.setModifiedTime(null);
-        }
-
         return list;
     }
 

@@ -28,14 +28,14 @@ public class UserController extends BassController {
     @Autowired
     private IUserService userService;
 
-    //------------------------------------------------------------------------//
+    //-----------------------------註冊-------------------------------------------//
     @RequestMapping("reg")
     //方法的回傳結果以json格式進行回傳給前端
     public JsonResult<Void> reg(User user) {
         userService.reg(user);
         return new JsonResult<Void>(OK);
     }
-//------------------------------------------------------------------------//
+//---------------------------------登入---------------------------------------//
 
     @RequestMapping("login")
     public JsonResult<User> login(String username,
@@ -63,7 +63,7 @@ public class UserController extends BassController {
 
         return new JsonResult<User>(OK, data);
     }
-//------------------------------------------------------------------------//
+//------------------------------更改密碼------------------------------------------//
 
     @RequestMapping("change_password")
     public JsonResult<Void> changePassword(String oldPassword,
@@ -87,7 +87,7 @@ public class UserController extends BassController {
 //--------------------------------圖片---------------------------------------
         return new JsonResult<>(OK, data);
     }
-//------------------------------------------------------------------------//
+//-----------------------------更改個人資料-------------------------------------------//
 
     //會員點擊更新按鈕可以送出數據的更新操作
     @RequestMapping("change_info")

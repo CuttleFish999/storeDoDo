@@ -41,7 +41,7 @@ public class CartController extends BassController {
 
     }
 
-    @PostMapping("{cid}/num/add")
+    @RequestMapping("{cid}/num/add")
     public JsonResult<Integer> addNum(@PathVariable("cid") Integer cid,
                                       HttpSession session) {
 

@@ -6,6 +6,7 @@ import com.cy.store.vo.CartVO;
 import java.util.Date;
 import java.util.List;
 
+//購物車
 public interface CartMapper {
 
     /**
@@ -15,6 +16,7 @@ public interface CartMapper {
      * @return  受影響筆數
      */
     Integer insert(Cart cart);
+//----------------------------------------------//
 
     /**
      * 更新購物車商品數量

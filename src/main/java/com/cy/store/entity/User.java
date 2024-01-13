@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 /**
- * 會員數據VO
+ * 會員VO
  */
 
 public class User extends BaseEntity implements Serializable {

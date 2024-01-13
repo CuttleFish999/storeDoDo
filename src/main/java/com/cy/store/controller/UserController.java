@@ -266,17 +266,7 @@ public class UserController extends BassController {
     public JsonResult<Void> reg(User user) {
         //創建回傳結果對象
         JsonResult<Void> result = new JsonResult<>();
-        try {
-            userService.reg(user);
-            result.setState(200);
-            result.setMessage("會員註冊成功");
-        } catch (UsernameDuplicatedException e) {
-            result.setState(4000);
-            result.setMessage("名稱已被使用");
-        } catch (InsertException e) {
-            result.setState(5000);
-            result.setMessage("註冊時產生未知的異常");
-        }
+
         return result;
     }
     */

@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class CartVO implements Serializable {
     /**
-     * 購物車資料
+     * 購物車資料跟商品資料,要放到訂單裡
      */
     private Integer cid;
     private Integer uid;

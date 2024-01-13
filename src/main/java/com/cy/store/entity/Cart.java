@@ -4,6 +4,7 @@ import com.cy.store.controller.BassController;
 
 import java.util.Objects;
 
+//購物車VO
 public class Cart  extends BaseEntity {
     private  Integer cid;
     private  Integer uid;

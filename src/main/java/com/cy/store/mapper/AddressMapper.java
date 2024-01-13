@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 
-//收貨地址介面
+//收貨地址
 public interface AddressMapper {
     /**
      * 新增會員收貨地址
@@ -16,7 +16,6 @@ public interface AddressMapper {
      * @return 影響的筆數
      */
     Integer insert(Address address);
-
 
     /**
      * 根據會員id統計地址數量
@@ -79,5 +78,6 @@ public interface AddressMapper {
 
     Address findLastModified(Integer uid);
 
+    //----------------------------------------------//
 
 }

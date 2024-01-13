@@ -28,6 +28,10 @@ public class CartServiceImpl implements ICartService {
     @Autowired
     private ProductMapper productMapper;
 
+
+
+//--------------------------------------------------------------------------------//
+//加入購物車
     @Override
     public void addToCart(Integer uid, Integer pid, Integer amount, String username) {
 
@@ -74,6 +78,8 @@ public class CartServiceImpl implements ICartService {
         return cartMapper.findVOByUid(uid);
     }
 
+//--------------------------------------------------------------------------------//
+
     //購物車前端頁面"+"數量
     @Override
     public Integer addNum(Integer cid, Integer uid, String username) {
@@ -102,6 +108,7 @@ public class CartServiceImpl implements ICartService {
         return num;
     }
 
+
     //購物車前端頁面"-"數量
     @Override
     public Integer reduceNum(Integer cid, Integer uid, String username) {
@@ -116,4 +123,9 @@ public class CartServiceImpl implements ICartService {
         }
         return num;
     }
+//--------------------------------------------------------------------------------//
+
+
+
+
 }

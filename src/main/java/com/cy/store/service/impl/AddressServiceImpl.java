@@ -84,6 +84,7 @@ public class AddressServiceImpl implements IAddressService {
 //        }
         return list;
     }
+//---------------------------------------------------------------------------//
 
     //設定地址是預設
     @Override
@@ -109,6 +110,8 @@ public class AddressServiceImpl implements IAddressService {
             throw new UpdateException("更新資料異常");
         }
     }
+
+    //---------------------------------------------------------------------------//
 
 
     //刪除會員收貨地址

@@ -4,6 +4,8 @@ import com.cy.store.entity.District;
 
 import java.util.List;
 
+
+//地址
 public interface DistrictMapper {
 
     /**

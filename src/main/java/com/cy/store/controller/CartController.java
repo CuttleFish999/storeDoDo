@@ -41,6 +41,8 @@ public class CartController extends BassController {
 
     }
 
+
+    //購物車數量"+"的按鈕
     @RequestMapping("{cid}/num/add")
     public JsonResult<Integer> addNum(@PathVariable("cid") Integer cid,
                                       HttpSession session) {
@@ -54,6 +56,7 @@ public class CartController extends BassController {
 
     }
 
+    //購物車數量"-"的按鈕
     @PostMapping("{cid}/num/reduce")
     public JsonResult<Integer> reduceNum(@PathVariable("cid") Integer cid,
                                       HttpSession session) {

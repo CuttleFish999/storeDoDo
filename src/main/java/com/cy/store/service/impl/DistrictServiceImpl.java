@@ -19,8 +19,8 @@ public class DistrictServiceImpl implements IDistrictService {
         List<District> list = districtMapper.findByParent(parent);
 
         /**
-         * 這個方法藉由父代號parent獲取省市的資料,
-         * 獲取到資料之後裡面的id跟parent就沒有作用了
+         * 這個方法藉由父代號parent拿到國家跟市的資料,
+         * 拿到後資料之後裡面的id跟parent就沒有作用了
          * 所以可以設置null,提升一點效率
          */
         for (District d : list) {
@@ -37,7 +37,6 @@ public class DistrictServiceImpl implements IDistrictService {
 
         return districtMapper.findNameByCode(code);
     }
-
 
 //------------------------------------------------------------------------//
 

@@ -5,10 +5,8 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
 
-/**
- * 會員資料的介面
- */
 
+//會員資料
 public interface UserMapper {
 //----------------------------------------------//
 

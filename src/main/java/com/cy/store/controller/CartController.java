@@ -57,9 +57,9 @@ public class CartController extends BassController {
     }
 
     //購物車數量"-"的按鈕
-    @PostMapping("{cid}/num/reduce")
+    @RequestMapping("{cid}/num/reduce")
     public JsonResult<Integer> reduceNum(@PathVariable("cid") Integer cid,
-                                      HttpSession session) {
+                                         HttpSession session) {
 
         //先從session拿到uid跟username
         Integer uid = getuidFromSession(session);
@@ -69,6 +69,32 @@ public class CartController extends BassController {
         return new JsonResult<Integer>(OK, data);
 
     }
+
+    //多選購物車商品的按鈕
+    @RequestMapping("list")
+    public JsonResult<List<CartVO>> getVOByCid(Integer[] cids, HttpSession session) {
+        //從session取uid出來
+        Integer uid = getuidFromSession(session);
+        //再把找出來的uid給service去找資料
+        List<CartVO> data = cartService.getVOByCid(uid,cids);
+
+        return new JsonResult<List<CartVO>>(OK, data);
+
+    }
+
+    @RequestMapping("deleteCart")
+    public JsonResult<Void> deleteCartByCid(Integer[] cids){
+
+        for (Integer cid: cids) {
+            System.out.println(cid);
+            cartService.deleteCartByCid(cid);
+        }
+
+        return new JsonResult<>(OK);
+    }
+
+
+
 
 
 }

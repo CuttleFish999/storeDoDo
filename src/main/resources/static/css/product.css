@@ -18,11 +18,11 @@
 .big-show {
 	display: block;
 }
-/*价格框的小字体样式*/
+/*價格框字體*/
 .price-bar small {
 	font-size: 14px;
 }
-/*价格框的样式*/
+/*價格框樣式*/
 .price-bar {
 	background: #f0f9ff;
 	color: #092f97;
@@ -32,31 +32,31 @@
 	font-size: 30px;
 	margin: 5px;
 }
-/*购买表单的间隔*/
+/*購買表單間隔*/
 .product-form {
 	margin: 10px 0;
 }
-/*表单行的间隔*/
+/*表單間隔*/
 .form-space {
 	margin: 10px 0;
 }
-/*售后的图标*/
+/*售後服務圖*/
 .saled-icon {
 	color: #092F97;
 	font-size: 25px;
 }
-/*售后的标题*/
+/*售後服務標題*/
 .saled-title {
 	color: #092F97;
 	font-size: 18px;
 }
-/*售后的内容*/
+/*售後服務內容*/
 .saled-content {
 	color: #999999;
 	font-size: 12px;
 	padding-bottom: 40px;
 }
-/*数量按钮样式*/
+/*數量按鈕大小*/
 .num-btn {
 	width: 30px;
 }

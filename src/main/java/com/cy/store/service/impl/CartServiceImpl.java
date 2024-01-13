@@ -5,15 +5,13 @@ import com.cy.store.entity.Product;
 import com.cy.store.mapper.CartMapper;
 import com.cy.store.mapper.ProductMapper;
 import com.cy.store.service.ICartService;
-import com.cy.store.service.ex.AccessDeniedException;
-import com.cy.store.service.ex.CartNotFoundException;
-import com.cy.store.service.ex.InsertException;
-import com.cy.store.service.ex.UpdateException;
+import com.cy.store.service.ex.*;
 import com.cy.store.vo.CartVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -29,8 +27,7 @@ public class CartServiceImpl implements ICartService {
     private ProductMapper productMapper;
 
 
-
-//--------------------------------------------------------------------------------//
+    //--------------------------------------------------------------------------------//
 //加入購物車
     @Override
     public void addToCart(Integer uid, Integer pid, Integer amount, String username) {
@@ -114,7 +111,7 @@ public class CartServiceImpl implements ICartService {
     public Integer reduceNum(Integer cid, Integer uid, String username) {
 
         Cart result = cartMapper.findByCid(cid);
-        
+
         Integer num = result.getNum() - 1;
         Date date = new Date();
         Integer rows = cartMapper.updateNumByCid(cid, num, username, date);
@@ -126,6 +123,32 @@ public class CartServiceImpl implements ICartService {
 //--------------------------------------------------------------------------------//
 
 
+    @Override
+    public List<CartVO> getVOByCid(Integer uid, Integer[] cids) {
+        List<CartVO> list = cartMapper.findVOByCid(cids);
+        Iterator<CartVO> it = list.iterator();
+        while(it.hasNext()){
+            CartVO cartVO = it.next();
+            if(!cartVO.getUid().equals(uid)){
+                list.remove(cartVO);
+            }
+        }
+        return list;
+    }
+
+//--------------------------------------------------------------------------------//
+
+    //根據cid刪除商品
+    @Override
+    public int deleteCartByCid(Integer cid) {
+        int result = cartMapper.deleteCartByCid(cid);
+
+        if (result == 0){
+            throw new DeleteException("刪除時發生問題");
+        }
+        return result;
+    }
+//--------------------------------------------------------------------------------//
 
 
 }

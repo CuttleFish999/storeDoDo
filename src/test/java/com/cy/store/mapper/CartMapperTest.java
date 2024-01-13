@@ -49,11 +49,24 @@ public class CartMapperTest {
     }
 
 
+
+    //多選購物車商品
+    @Test
+    public void findVOByCid(){
+        Integer[] cids = {1,2,3,7};
+        List<CartVO> list =  cartMapper.findVOByCid(cids);
+        System.out.println(list);
+    }
+
+
     @Test
     public void findByCid(){
         Integer cid = 4;
         Cart result = cartMapper.findByCid(cid);
         System.out.println(result);
     }
+
+
+
 }
 

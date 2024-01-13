@@ -32,7 +32,7 @@ public interface CartMapper {
                            Date modifiedTime);
 
     /**
-     * 根據會員id跟商品id查詢購物車裡面的東西
+     * 找到會員id跟商品id查詢購物車裡面的東西
      * @param uid 會員id
      * @param pid 商品id
      */
@@ -48,10 +48,20 @@ public interface CartMapper {
 
 
     /**
-     * 先根據購物車cid查詢購物車資料
+     * 用購物車cid查購物車資料
      * @param cid 購物車cid
-     * @return 有對應到的購物車資料都取出來,沒有救回傳null
+     * @return 有對應到的購物車資料都取出來,沒有就回傳null
      */
     Cart findByCid(Integer cid);
 
+
+    /**
+     * 根據購物車多選的商品要送到下一個頁面
+     * @param cids 購物車
+     * @return
+     */
+    List<CartVO> findVOByCid(Integer[] cids);
+
+    //根據cid刪除商品
+    int deleteCartByCid(Integer cid);
 }

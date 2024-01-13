@@ -149,7 +149,7 @@
                             &nbsp;
                             <span class="pull-right">已選商品
 										<span id="all-count">1</span>件 總價$
-										<span id="all-price">25298</span>元
+										<span id="all-price">111</span>元
 									</span>
                         </div>
                     </div>
@@ -232,34 +232,37 @@
 
     function showCartList() {
         $("#cart-list").empty();
+        // cid=6&cid=5&cid=4
+        // console.log(location.search.substr(1));
         $.ajax({
             url: "/carts/list",
             data: location.search.substr(1),
             type: "GET",
             dataType: "JSON",
-            success: function (json) {
+            success: function(json) {
                 let list = json.data;
                 console.log("count=" + list.length);
                 let allCount = 0;
                 let allPrice = 0;
                 for (let i = 0; i < list.length; i++) {
                     console.log(list[i].title);
-                    let tr =
-                        '<tr>'
-                        + '<td><img src="..#{image}collect.png" class="img-responsive" / > < /td>'
-                        + '<td><input type="hidden" name="cids" value="#{cid}" />#{title} </td>'
-                        + '<td>$<span>#{realPrice}</span></td>'
+                    let tr = '<tr>'
+                        + '<td><img src="..#{image}collect.png" class="img-responsive" /></td>'
+                        + '<td><input type="hidden" name="cids" value="#{cid}" />#{title}</td>'
+                        + '<td>¥<span>#{realPrice}</span></td>'
                         + '<td>#{num}</td>'
-                        + '<td>$<span>#{totalPrice}</span></td>'
+                        + '<td>¥<span>#{totalPrice}</span></td>'
                         + '</tr>';
+
                     tr = tr.replace(/#{cid}/g, list[i].cid);
                     tr = tr.replace(/#{image}/g, list[i].image);
                     tr = tr.replace(/#{title}/g, list[i].title);
                     tr = tr.replace(/#{realPrice}/g, list[i].realPrice);
                     tr = tr.replace(/#{num}/g, list[i].num);
-                    tr = tr.replace(/#{totalPrice}/g, list[i].realPrice *
-                        list[i].num);
+                    tr = tr.replace(/#{totalPrice}/g, list[i].realPrice * list[i].num);
+
                     $("#cart-list").append(tr);
+
                     allCount += list[i].num;
                     allPrice += list[i].realPrice * list[i].num;
                 }

@@ -22,7 +22,7 @@
 <body>
 <!--頭部-->
 <header class="header">
-    <img src="../images/index/house.png" alt=""  width="100px" height="100px"/>
+    <img src="../images/index/loogo-fotor-2024011212725.jpg" alt=""  width="100px" height="100px"/>
     <span class="pull-right"><small>歡迎訪問</small><b>租你好運商城</b></span>
 </header>
 <!--主體-->
@@ -37,14 +37,14 @@
             <div class="form-group">
                 <label class="col-md-3 control-label">會員名稱：</label>
                 <div class="col-md-8">
-                    <input name="username" type="text" class="form-control" placeholder="請輸入會員名稱">
+                    <input name="username" type="text" class="form-control" placeholder="請輸入會員名稱" pattern="^[a-zA-Z0-9]+$" title="用戶名只能包含英文字母和數字">
                 </div>
             </div>
             <!--密碼-->
             <div class="form-group">
                 <label class="col-md-3 control-label"> 密碼：</label>
                 <div class="col-md-8">
-                    <input name="password" type="text" class="form-control" placeholder="請輸入密碼">
+                    <input name="password" type="password" class="form-control" placeholder="請輸入密碼" pattern="^[a-zA-Z0-9]+$" title="密碼只能包含英文字母和數字">
                 </div>
             </div>
             <!--確認密碼-->
@@ -89,7 +89,7 @@
     <!--聯繫我們、下載客戶端等-->
     <div class="container beforeBottom">
         <div class="col-md-offset-1 col-md-3">
-            <div><img src="../images/index/pro1.jpg" alt="" class="footLogo"/></div>
+            <div><img src="../images/index/loogo-fotor-2024011212725.jpg" alt="" class="footLogo"/></div>
 <!--            <div><img src="../images/index/footerFont.png" alt=""/></div>-->
         </div>
         <div class="col-md-4 callus text-center">
@@ -131,6 +131,7 @@
             success: function (json) {
                 if (json.state == 200) {
                     alert("註冊成功 ! ");
+                    location.href = "login.html";
 
                 } else {
                     alert("註冊失敗 ! " + json.message);

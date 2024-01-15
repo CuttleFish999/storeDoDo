@@ -152,8 +152,23 @@ public class AddressServiceImpl implements IAddressService {
         }
     }
 
+//------------------------------------------------------------------------//
+
+    //訂單需要透過這個找到商品
+    @Override
+    public Address getByAid(Integer aid,Integer uid) {
+       Address address =  addressMapper.findByAid(aid);
+        if(address == null){
+            throw  new ProductNotFoundException("商品找不到");
+        }
+        if(!address.getUid().equals(uid)){
+            throw  new AccessDeniedException("資料異常");
+        }
+        return address;
+    }
 
 //------------------------------------------------------------------------//
+
 
 
 }

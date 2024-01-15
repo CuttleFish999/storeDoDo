@@ -31,4 +31,12 @@ public interface IAddressService {
      */
     void delete(Integer aid,Integer uid,String username);
 
+
+    /**
+     * 訂單需要透過這個方法拿到商品資料
+     * @param aid 商品id
+     * @param uid uid用來確認資料
+     * @return
+     */
+    Address getByAid(Integer aid,Integer uid);
 }

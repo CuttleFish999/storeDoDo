@@ -74,7 +74,7 @@ CREATE TABLE `t_cart` (
   `modified_user` varchar(20) DEFAULT NULL COMMENT '修改人',
   `modified_time` datetime DEFAULT NULL COMMENT '修改時間',
   PRIMARY KEY (`cid`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -83,7 +83,7 @@ CREATE TABLE `t_cart` (
 
 LOCK TABLES `t_cart` WRITE;
 /*!40000 ALTER TABLE `t_cart` DISABLE KEYS */;
-INSERT INTO `t_cart` VALUES (1,2,10000001,1000,2,'小王','2024-01-11 00:04:47','test02','2024-01-11 02:17:00'),(2,2,10000003,13,2,'小王','2024-01-11 00:04:47','test02','2024-01-11 16:42:58'),(3,2,10000006,28,2,'test02','2024-01-11 01:56:23','test02','2024-01-11 02:22:32'),(4,2,10000009,39929,1,'test02','2024-01-11 02:21:19','test02','2024-01-12 10:02:52'),(5,2,10000007,32999,1,'test02','2024-01-11 02:23:22','test02','2024-01-12 10:02:51');
+INSERT INTO `t_cart` VALUES (2,2,10000003,13,3,'小王','2024-01-11 00:04:47','test02','2024-01-15 14:33:13'),(3,2,10000006,28,2,'test02','2024-01-11 01:56:23','test02','2024-01-11 02:22:32'),(5,2,10000007,32999,1,'test02','2024-01-11 02:23:22','test02','2024-01-12 10:02:51'),(6,2,10000001,23,2,'test02','2024-01-15 14:33:24','test02','2024-01-15 15:28:02');
 /*!40000 ALTER TABLE `t_cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,7 +138,7 @@ CREATE TABLE `t_order` (
   `modified_user` varchar(20) DEFAULT NULL COMMENT '修改人',
   `modified_time` datetime DEFAULT NULL COMMENT '修改時間',
   PRIMARY KEY (`oid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -147,6 +147,7 @@ CREATE TABLE `t_order` (
 
 LOCK TABLES `t_order` WRITE;
 /*!40000 ALTER TABLE `t_order` DISABLE KEYS */;
+INSERT INTO `t_order` VALUES (1,2,'測試訂單','0912345678',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(2,2,'小王','0980808080','8860000','8864000','8864001','小王村3號',33055,0,'2024-01-15 13:51:05',NULL,'test02','2024-01-15 13:51:05','test02','2024-01-15 13:51:05'),(11,2,'測試地址','0966666666','8860000','8861200','8861202','測試路1號',33045,0,'2024-01-15 15:28:07',NULL,'test02','2024-01-15 15:28:07','test02','2024-01-15 15:28:07');
 /*!40000 ALTER TABLE `t_order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -170,7 +171,7 @@ CREATE TABLE `t_order_item` (
   `modified_user` varchar(20) DEFAULT NULL COMMENT '修改人',
   `modified_time` datetime DEFAULT NULL COMMENT '修改時間',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -179,6 +180,7 @@ CREATE TABLE `t_order_item` (
 
 LOCK TABLES `t_order_item` WRITE;
 /*!40000 ALTER TABLE `t_order_item` DISABLE KEYS */;
+INSERT INTO `t_order_item` VALUES (1,1,10000004,'(deli）1548A商務辦公計算機,太陽能雙電源',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(2,2,10000007,'Dell 700R經典版金色','/images/portal/11DELLran7000gold/',32999,1,'test02','2024-01-15 13:51:05','test02','2024-01-15 13:51:05'),(3,2,10000006,'三木 C4523 網格夾鏈袋/文件帶12個裝顏色隨機','/images/portal/005/',28,2,'test02','2024-01-15 13:51:05','test02','2024-01-15 13:51:05'),(20,11,10000001,'測試筆記本','/images/portal/001/',23,2,'test02','2024-01-15 15:28:07','test02','2024-01-15 15:28:07'),(21,11,10000007,'Dell 700R經典版金色','/images/portal/11DELLran7000gold/',32999,1,'test02','2024-01-15 15:28:07','test02','2024-01-15 15:28:07');
 /*!40000 ALTER TABLE `t_order_item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -214,7 +216,7 @@ CREATE TABLE `t_product` (
 
 LOCK TABLES `t_product` WRITE;
 /*!40000 ALTER TABLE `t_product` DISABLE KEYS */;
-INSERT INTO `t_product` VALUES (10000001,238,'筆記本','測試筆記本','超值特惠!',23,100,'/images/portal/00GuangBo1040A5GBR0731/',1,10,'2023-10-25 15:08:55','2023-10-25 15:08:55','admin','admin'),(10000002,238,'皮質筆記本','(GuangBo)皮質日程筆記本,計畫筆記本米色FB60322','超值特惠!',46,100,'/images/portal/001GuangBo)FB60322/',1,9,'2023-10-25 15:08:55','2023-10-25 15:08:55','admin','admin'),(10000003,238,'16k记事本','(GuangBo)16K115頁筆記本日記本圖案隨機','超值特惠!',13,100,'/images/portal/01GuangBo16K115FB60506/',1,8,'2023-10-25 15:08:55','2023-10-25 15:08:55','admin','admin'),(10000004,241,'計算機','(deli）1548A商務辦公計算機,太陽能雙電源','超值特惠!',58,100,'/images/portal/002calculator1548A/',1,7,'2023-10-25 15:08:55','2023-10-25 15:08:55','admin','admin'),(10000005,241,'滾珠筆','(Schneider） K15 經典款滾珠筆(5之混裝)','超值特惠!',29,100,'/images/portal/03SchneiderK15/',1,6,'2023-10-25 15:08:55','2023-10-25 15:08:55','admin','admin'),(10000006,236,'夾鏈袋','三木 C4523 網格夾鏈袋/文件帶12個裝顏色隨機','超值特惠!',28,100,'/images/portal/04_SUNWOODC452312/',1,5,'2023-10-25 15:08:55','2023-10-25 15:08:55','admin','admin'),(10000007,163,'筆記型電腦','Dell 700R經典版金色','下單送行動電源',32999,100,'/images/portal/11DELLran7000gold/',1,4,'2023-10-25 15:08:55','2023-10-25 15:08:55','admin','admin'),(10000008,163,'筆記型電腦','Dell 700R 1605經典版銀色','下單送行動電源',4549,100,'/images/portal/11DELLran7000R1605Ssilvery/',1,3,'2023-10-25 15:08:55','2023-10-25 15:08:55','admin','admin'),(10000009,163,'筆記型電腦','Dell 700R學習板金色','下單送行動電源',39929,100,'/images/portal/11DELLran7000gold/',1,2,'2023-10-25 15:08:55','2023-10-25 15:08:55','admin','admin'),(10000010,163,'筆記型電腦','Dell 700R 1605 經典版银色','下單送行動電源',5559,100,'/images/portal/11DELLran7000R1605Ssilvery/',1,1,'2023-10-25 15:08:55','2023-10-25 15:08:55','admin','admin');
+INSERT INTO `t_product` VALUES (10000001,238,'筆記本','測試筆記本','超值特惠!',23,100,'/images/portal/001/',1,10,'2023-10-25 15:08:55','2023-10-25 15:08:55','admin','admin'),(10000002,238,'皮質筆記本','(GuangBo)皮質日程筆記本,計畫筆記本米色FB60322','超值特惠!',46,100,'/images/portal/002/',1,9,'2023-10-25 15:08:55','2023-10-25 15:08:55','admin','admin'),(10000003,238,'16k记事本','(GuangBo)16K115頁筆記本日記本圖案隨機','超值特惠!',13,100,'/images/portal/003/',1,8,'2023-10-25 15:08:55','2023-10-25 15:08:55','admin','admin'),(10000004,241,'計算機','(deli）1548A商務辦公計算機,太陽能雙電源','超值特惠!',58,100,'/images/portal/004/',1,7,'2023-10-25 15:08:55','2023-10-25 15:08:55','admin','admin'),(10000005,241,'滾珠筆','(Schneider） K15 經典款滾珠筆(5之混裝)','超值特惠!',29,100,'/images/portal/03SchneiderK15/',1,6,'2023-10-25 15:08:55','2023-10-25 15:08:55','admin','admin'),(10000006,236,'夾鏈袋','三木 C4523 網格夾鏈袋/文件帶12個裝顏色隨機','超值特惠!',28,100,'/images/portal/005/',1,5,'2023-10-25 15:08:55','2023-10-25 15:08:55','admin','admin'),(10000007,163,'筆記型電腦','Dell 700R經典版金色','下單送行動電源',32999,100,'/images/portal/11DELLran7000gold/',1,4,'2023-10-25 15:08:55','2023-10-25 15:08:55','admin','admin'),(10000008,163,'筆記型電腦','Dell 700R 1605經典版銀色','下單送行動電源',4549,100,'/images/portal/11DELLran7000R1605Ssilvery/',1,3,'2023-10-25 15:08:55','2023-10-25 15:08:55','admin','admin'),(10000009,163,'筆記型電腦','Dell 700R學習板金色','下單送行動電源',39929,100,'/images/portal/11DELLran7000gold/',1,2,'2023-10-25 15:08:55','2023-10-25 15:08:55','admin','admin'),(10000010,163,'筆記型電腦','Dell 700R 1605 經典版银色','下單送行動電源',5559,100,'/images/portal/11DELLran7000R1605Ssilvery/',1,1,'2023-10-25 15:08:55','2023-10-25 15:08:55','admin','admin');
 /*!40000 ALTER TABLE `t_product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -263,4 +265,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-01-12 11:32:05
+-- Dump completed on 2024-01-15 15:28:54

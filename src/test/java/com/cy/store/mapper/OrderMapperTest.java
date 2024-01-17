@@ -19,7 +19,7 @@ public class OrderMapperTest {
 
 
     @Test
-    public void insert(){
+    public void insert() {
         Order order = new Order();
         order.setUid(2);
         order.setRecvName("測試訂單");
@@ -28,7 +28,7 @@ public class OrderMapperTest {
     }
 
     @Test
-    public void insertOrderItem(){
+    public void insertOrderItem() {
         OrderItem orderItem = new OrderItem();
         orderItem.setOid(1);
         orderItem.setPid(10000004);
@@ -37,6 +37,10 @@ public class OrderMapperTest {
     }
 
 
+    @Test
+    public void queryOrderVoByOid() {
+        System.out.println(orderMapper.queryOrderVoByOid(2));
+    }
 
 
 }

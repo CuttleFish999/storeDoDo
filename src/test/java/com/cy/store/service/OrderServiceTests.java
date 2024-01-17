@@ -2,6 +2,7 @@ package com.cy.store.service;
 
 import com.cy.store.entity.Order;
 import com.cy.store.vo.CartVO;
+import com.cy.store.vo.OrderVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,12 @@ public class OrderServiceTests {
         Integer[] cids = {3, 5};
         Order order =  orderService.create(6, 2, "test02", cids);
         System.out.println(order);
+    }
+
+    @Test
+    public void queryOrderVoByOid() {
+        List<OrderVO> orderVO =  orderService.queryOrderVoByOid(2);
+        System.out.println(orderVO);
     }
 
 }

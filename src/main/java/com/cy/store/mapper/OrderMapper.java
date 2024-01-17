@@ -2,6 +2,9 @@ package com.cy.store.mapper;
 
 import com.cy.store.entity.Order;
 import com.cy.store.entity.OrderItem;
+import com.cy.store.vo.OrderVO;
+
+import java.util.List;
 
 public interface OrderMapper {
 
@@ -20,4 +23,7 @@ public interface OrderMapper {
      * @return 幾筆
      */
     Integer insertOrderItem(OrderItem orderItem);
+
+
+    List<OrderVO> queryOrderVoByOid(Integer oid);
 }

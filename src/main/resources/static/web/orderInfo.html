@@ -96,11 +96,11 @@
             訂單編號：1101000301 ，狀態：等待收貨
         </div>
         <ol class="order-flow">
-            <li class="order-success">1.提交訂單 <small>2022-12-2 20:32:17</small> <span
+            <li class="order-success">1.提交訂單 <small>2023-12-2 20:32:17</small> <span
                     class="fa fa-check-circle"></span></li>
-            <li class="order-success">2.付款成功 <small>2022-12-2 20:35:03</small> <span
+            <li class="order-success">2.付款成功 <small>2023-12-2 20:35:03</small> <span
                     class="fa fa-check-circle"></span></li>
-            <li class="order-success">3.發貨 <small>2022-12-3 08:13:34</small> <span
+            <li class="order-success">3.發貨 <small>2023-12-3 08:13:34</small> <span
                     class="fa fa-check-circle"></span></li>
             <li>4.會員收貨</li>
             <li>5.購物評價</li>
@@ -113,14 +113,14 @@
         <p>物流公司：tibame快遞</p>
         <p>快递单号：301111303203048</p>
         <p>物流信息：</p>
-        <p>2018-12-3 08:13:34 您的包裹在【tibame物流中心】檢貨完畢</p>
-        <p>2018-12-3 08:39:50 您的包裹在【tibame物流中心】準備上車</p>
-        <p>2018-12-3 12:20:07 您的包裹到達【tibame發貨中心】</p>
+        <p>2023-12-3 08:13:34 您的包裹在【tibame物流中心】檢貨完畢</p>
+        <p>2023-12-3 08:39:50 您的包裹在【tibame物流中心】準備上車</p>
+        <p>2023-12-3 12:20:07 您的包裹到達【tibame發貨中心】</p>
         <h2 class="page-header">商品詳情：</h2>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    訂單編號：1101000301，下單時間：2018-12-2 20:32:17 ， 收貨人：八戒
+                    訂單編號：1101000301，下單時間：2023-12-2 20:32:17 ， 收貨人：小王
                 </h3>
             </div>
             <div class="panel-body">
@@ -138,7 +138,7 @@
                     <tr>
                         <td><img src="../images/portal/12(DELL)XPS13gold/collect.png" class="img-responsive"/></td>
                         <td>(Lenovo)Air13 Pro 13.3英寸14.8mm超輕薄筆記型電腦</td>
-                        <td>$span>25298</span></td>
+                        <td>$<span>25298</span></td>
                         <td>1件</td>
                         <td>$<span>5298</span></td>
                     </tr>
@@ -213,6 +213,48 @@
 </footer>
 <!--footer結束-->
 
+
+<script>
+
+
+    $(function () {
+
+        //自动发送ajax请求查询订单信息
+        showOrder(oid);
+    })
+
+    //查询订单信息
+    function showOrder(oid) {
+        $.ajax({
+            url : "/order/queryOrderVo",
+            type: "get",
+            data: "oid=" + oid,
+            dataType: "json",
+            success: function (res) {
+
+                for (let i = 0; i < res.data.length; i++) {
+                    let str = "";
+                    let orderVo = res.data[i]
+                    str = "<tr>"
+                        + "<td><img src=.." + orderVo.image + "collect.png" + " class=\"img-responsive\" /></td>"
+                        + "<td>" + orderVo.title + "</td>"
+                        + "<td>¥<span>" + orderVo.price + "</span></td>"
+                        + "<td>" + orderVo.num +"</td>"
+                        + "<td>¥<span>" + orderVo.price * orderVo.num + "</span></td>"
+                        + "</tr>"
+                    //将每个商品逐个插入到表格中
+                    $(".orders-body").append(str)
+                }
+                //改变订单总金额
+                $("#totalPrice").html(tempOrder.totalPrice)
+            },
+            error: function (error) {
+                alert("服务器出现故障，请等待攻城狮修复！！")
+            }
+        });
+    }
+
+</script>
 </body>
 
 </html>

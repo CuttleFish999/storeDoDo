@@ -9,6 +9,7 @@ import com.cy.store.service.ICartService;
 import com.cy.store.service.IOrderService;
 import com.cy.store.service.ex.InsertException;
 import com.cy.store.vo.CartVO;
+import com.cy.store.vo.OrderVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -86,7 +87,22 @@ public class OrderServiceImpl implements IOrderService {
                 throw new InsertException("新增資料異常");
             }
         }
-        //---------------------訂單明細----------------------//
         return order;
     }
+    //---------------------訂單明細----------------------//
+
+
+    //---------------------訂單----------------------//
+
+    @Override
+    public List<OrderVO> queryOrderVoByOid(Integer oid) {
+
+        List<OrderVO> orderVos = orderMapper.queryOrderVoByOid(oid);
+
+        return orderVos;
+    }
+
+
+
 }
+
